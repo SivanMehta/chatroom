@@ -11,6 +11,7 @@ Just using as many different Node.js libraries / techniques as possible so I hav
   - use [Mongo](https://www.mongodb.com/) in "production" because it actually scales beyond one computer
 - Search engine for data built in [Elastic Search](https://www.sitepoint.com/search-engine-node-elasticsearch/)
 - API driven backend interaction so a native iOS / Android would simply be easy to develop
+  - you could use [understudy](https://github.com/bmeck/understudy) to extensibly layout the API like with Slay
 - Backend API calls made via [fetch](https://github.com/github/fetch)
 - [Travis-CI](https://travis-ci.org/) automatic testing suite
 - Logging via [Winston](https://github.com/winstonjs/winston)
