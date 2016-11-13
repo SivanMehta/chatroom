@@ -4,6 +4,7 @@ Just using as many different Node.js libraries / techniques as possible so I hav
 
 - [React](https://facebook.github.io/react/) and [Redux](http://redux.js.org/docs/basics/UsageWithReact.html) for general front-end control flow
   - Could be built with some combination of [Webpack](https://webpack.github.io/) / [Gulp](http://gulpjs.com/)
+  - Be sure to [minimize it](https://github.com/Swaagie/minimize)
 - [D3.js](https://d3js.org/) for graphs and visualizations of gathered data
 - Abstracted back end
   - use [Level](https://github.com/Level/levelup) in development 
