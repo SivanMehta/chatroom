@@ -12,3 +12,4 @@ Just using as many different Node.js libraries / techniques as possible so I hav
 - API driven backend interaction so a native iOS / Android would simply be easy to develop
 - Backend API calls made via [fetch](https://github.com/github/fetch)
 - [Travis-CI](https://travis-ci.org/) automatic testing suite
+- Logging via [Winston](https://github.com/winstonjs/winston)
