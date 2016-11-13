@@ -15,3 +15,4 @@ Just using as many different Node.js libraries / techniques as possible so I hav
 - Backend API calls made via [fetch](https://github.com/github/fetch)
 - [Travis-CI](https://travis-ci.org/) automatic testing suite
 - Logging via [Winston](https://github.com/winstonjs/winston)
+- Pick a dataset that allows us to use some form of Machine Learning in order to use [Synaptic](http://caza.la/synaptic/#)
