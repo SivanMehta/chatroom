@@ -16,3 +16,15 @@ Just using as many different Node.js libraries / techniques as possible so I hav
 - [Travis-CI](https://travis-ci.org/) automatic testing suite
 - Logging via [Winston](https://github.com/winstonjs/winston)
 - Pick a dataset that allows us to use some form of Machine Learning in order to use [Synaptic](http://caza.la/synaptic/#)
+
+# Ideas for App itself
+
+- This could be an implementation of a chat app like Slack that imploys the usage of each of the above systems in a valuable part of the system
+- Feature - Technology Map
+  - React/Redux --> General interface (just build with mobile-friendly bootstrap for ease of use)
+  - Webpack / Gulp --> Build tools
+  - D3.js --> Analytics on chat statistics
+  - Level / Mongo --> Persistence of chat messages
+  - ElasticSearch --> Searching backlog of messages
+  - github/fetch --> fetching past messages when returning to channel
+  - Synaptic --> Suggesting messages (can use markov chains perhaps)
