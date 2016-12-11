@@ -1,0 +1,29 @@
+{
+  "name": "reference-project",
+  "version": "1.0.0",
+  "description": "Just using as many different Node.js libraries / techniques as possible so I have a centralized place to reference code.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'there are no test written' && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SivanMehta/reference-project.git"
+  },
+  "keywords": [
+    "node",
+    "reference",
+    "react",
+    "redux",
+    "d3",
+    "mongo",
+    "fetch",
+    "machine learning"
+  ],
+  "author": "Sivan Mehta",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/SivanMehta/reference-project/issues"
+  },
+  "homepage": "https://github.com/SivanMehta/reference-project#readme"
+}
