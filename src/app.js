@@ -1,5 +1,15 @@
+// React
 import React from 'react'
 import { render } from 'react-dom'
+
+// Material UI needs
+import injectTapEventPlugin from 'react-tap-event-plugin'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+injectTapEventPlugin()
+
+// Custom Components
+import Greeting from './pieces/greeting'
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -9,9 +19,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <span>Asuh dude</span>
+      <MuiThemeProvider>
+        <Greeting />
+      </MuiThemeProvider>
     )
   }
 }
 
-render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app'))
