@@ -7,6 +7,10 @@ import wisdom from 'bob-ross-lipsum'
 // custom components
 import Message from './pieces/message'
 
+// Material UI
+import { List } from 'material-ui/List'
+import Avatar from 'material-ui/Avatar'
+
 export default class Room extends React.Component {
   constructor(props) {
     super()
@@ -26,7 +30,8 @@ export default class Room extends React.Component {
     const result = this.state.messages.map((message, i) => {
       return(
         <Message content = { message }
-                 key = { this.props.params.roomId + i }/>
+                  key = { this.props.params.roomId + i }
+                  avatar = { i } />
       )
     })
     return result
@@ -37,7 +42,9 @@ export default class Room extends React.Component {
     return(
       <div>
         <span>This is a room for { this.props.params.roomId }</span>
-        { this.renderMessages() }
+        <List>
+          { this.renderMessages() }
+        </List>
       </div>
     )
   }
