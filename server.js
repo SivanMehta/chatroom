@@ -6,16 +6,15 @@ const path = require('path')
 var morgan = require('morgan')
 app.use(morgan('dev'))
 
-// body parsing
+// body and cookie parsing
 app.use(require('body-parser').json())
+var cookieParser = app.use(require('cookie-parser')())
 
 // Handle static files
 app.use(express.static(path.join(__dirname, 'client', 'public')))
 
-// routing for now
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'))
-})
+// authentication handling
+require('./app/auth').init(app)
 
 const PORT = process.env.PORT || 8080
 app.set('port', PORT)
