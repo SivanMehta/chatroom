@@ -53,7 +53,13 @@ class Nav extends React.Component {
     this.state = {
       open: false
     }
+
+    this.close = this.close.bind(this)
+    this.open = this.open.bind(this)
   }
+
+  close() { this.setState({open: false}) }
+  open() { this.setState({open: true}) }
 
   rooms() {
     // in the future, this would return some recommended rooms, but for now we can hard code them
@@ -63,7 +69,8 @@ class Nav extends React.Component {
         <ListItem
           key = { i }
           primaryText = { room }
-          containerElement={ <Link to={ "/room/" + room }/> } />
+          containerElement={ <Link to={ "/room/" + room }/> }
+          onTouchTap = { this.close }/>
       )
     })
 
@@ -73,13 +80,13 @@ class Nav extends React.Component {
   render() {
     return (
       <div>
-        <IconButton onTouchTap = { () => this.setState({open: true}) }>
+        <IconButton onTouchTap = { this.open }>
           <MenuButton/>
         </IconButton>
         <Drawer
           docked = { false }
           open = { this.state.open }
-          onRequestChange = { () => this.setState({open: false}) } >
+          onRequestChange = { this.close } >
             <List>
               <ListItem primaryText = "Profile" leftIcon = { <AccountIcon /> }/>
               <ListItem primaryText = "Settings" leftIcon = { <SettingsIcon /> }/>
@@ -91,7 +98,8 @@ class Nav extends React.Component {
               <Divider />
               <ListItem primaryText = "Log out"
                 leftIcon = { <ExitIcon /> }
-                containerElement = { <Link to = "/" /> } />
+                containerElement = { <Link to = "/" /> }
+                onTouchTap = { this.close }/>
             </List>
         </Drawer>
       </div>
