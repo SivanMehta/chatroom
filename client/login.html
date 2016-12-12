@@ -6,27 +6,21 @@
           content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1" >
   </head>
   <body>
-
-    <nav style = "background-color: #00BDD1;">
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo left">chatroom</a>
-      </div>
-    </nav>
     <div class="container">
-      <form method = "POST" action = "/login">
+      <form method = "post" action = "/login">
         <div class="row">
           <div class="input-field">
-            <input id="email" type="email" class="validate" name = "email">
+            <input type="email" class="form-control" name = "email">
             <label for="email">Email</label>
           </div>
        </div>
        <div class="row">
          <div class="input-field">
-           <input id="password" type="password" class="validate" email = "password">
+           <input type="password" class="form-control" name = "password">
            <label for="password">Password</label>
          </div>
        </div>
-       <button class = "btn green" type="submit" name="action">Submit</button>
+       <button class = "btn green" type="submit" name="action">Login</button>
      </form>
    </div> <!-- /container -->
 
