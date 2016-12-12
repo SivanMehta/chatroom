@@ -20,11 +20,7 @@ function authorize(req, res) {
 function is_logged_in(req, res, next) {
   const status = req.cookies[cookieName] ? scrambler.decrypt(req.cookies[cookieName]) : 'logged out'
   console.log(status)
-  if(status == 'logged in') {
-    next()
-  } else {
-    res.redirect("/login")
-  }
+  status == 'logged in' ? next() : res.redirect("/login")
 }
 
 function logout(req, res) {

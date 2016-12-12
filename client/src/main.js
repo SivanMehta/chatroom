@@ -98,8 +98,7 @@ class Nav extends React.Component {
               <Divider />
               <ListItem primaryText = "Log out"
                 leftIcon = { <ExitIcon /> }
-                containerElement = { <Link to = "/" /> }
-                onTouchTap = { this.close }/>
+                href = "/logout" />
             </List>
         </Drawer>
       </div>
