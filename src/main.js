@@ -1,20 +1,24 @@
 // React
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, Link, hashHistory } from 'react-router'
 
 // Material UI
 import injectTapEventPlugin from 'react-tap-event-plugin'; injectTapEventPlugin()
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
-import MenuButton from 'material-ui/svg-icons/navigation/menu'
-import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right'
+import Drawer from 'material-ui/Drawer'
 import Popover from 'material-ui/Popover'
-import Menu from 'material-ui/Menu'
-import MenuItem from 'material-ui/MenuItem'
+import { List, ListItem } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 
+// icons
+import MenuButton from 'material-ui/svg-icons/navigation/menu'
+import ChatIcon from 'material-ui/svg-icons/communication/chat'
+import SettingsIcon from 'material-ui/svg-icons/action/settings'
+import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
+import AccountIcon from 'material-ui/svg-icons/action/account-circle'
 
 class Main extends React.Component {
   constructor(props) {
@@ -45,13 +49,13 @@ class Nav extends React.Component {
     }
   }
 
-  renderRooms() {
+  rooms() {
     // in the future, this would return some recommended rooms, but for now we can hard code them
     return [
-      <MenuItem primaryText = "John" />,
-      <MenuItem primaryText = "Paul" />,
-      <MenuItem primaryText = "George" />,
-      <MenuItem primaryText = "Ringo" />
+      <ListItem key = { 1 } primaryText = "John" />,
+      <ListItem key = { 2 } primaryText = "Paul" />,
+      <ListItem key = { 3 } primaryText = "George" />,
+      <ListItem key = { 4 } primaryText = "Ringo" />
     ]
   }
 
@@ -61,19 +65,22 @@ class Nav extends React.Component {
         <IconButton onTouchTap = { () => this.setState({open: true}) }>
           <MenuButton/>
         </IconButton>
-        <Popover
+        <Drawer
+          docked = { false }
           open = { this.state.open }
-          onRequestClose = { () => this.setState({open: false}) } >
-          <Menu>
-            <MenuItem primaryText = "Profile" />
-            <MenuItem primaryText = "Settings" />
-            <MenuItem primaryText = "Rooms"
-                      menuItems = { this.renderRooms() }
-                      rightIcon = {<ArrowDropRight />}/>
-            <Divider />
-            <MenuItem primaryText="Logout" />
-          </Menu>
-        </Popover>
+          onRequestChange = { () => this.setState({open: false}) } >
+            <List>
+              <ListItem primaryText = "Profile" leftIcon = { <AccountIcon /> }/>
+              <ListItem primaryText = "Settings" leftIcon = { <SettingsIcon /> }/>
+              <ListItem primaryText = "Rooms"
+                        leftIcon = { <ChatIcon /> }
+                        nestedItems = { this.rooms() }
+                        primaryTogglesNestedList = { true }
+                        initiallyOpen = { false } />
+              <Divider />
+              <ListItem primaryText = "Log out" leftIcon = { <ExitIcon /> }/>
+            </List>
+        </Drawer>
       </div>
     )
   }
@@ -81,7 +88,9 @@ class Nav extends React.Component {
 
 render((
   <Router history = { hashHistory }>
-    <Route path="/" component = { Main }>
+    <Route path = "/" component = { Main }>
+      <Route path = "profile" component = { Main } />
+      <Route path = "settings" component = { Main } />
     </Route>
   </Router>
 ), document.getElementById('app'))
