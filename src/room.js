@@ -13,7 +13,6 @@ import Avatar from 'material-ui/Avatar'
 import Formsy from 'formsy-react'
 import FormsyText from 'formsy-material-ui/lib/FormsyText'
 
-
 export default class Room extends React.Component {
   constructor(props) {
     super()
@@ -27,6 +26,10 @@ export default class Room extends React.Component {
     this.state = {
       messages: messages
     }
+  }
+
+  sendMessage(data) {
+    console.log(data)
   }
 
   renderMessages() {
@@ -48,7 +51,7 @@ export default class Room extends React.Component {
         <List>
           { this.renderMessages() }
         </List>
-        <Formsy.Form>
+        <Formsy.Form onValidSubmit = { this.sendMessage }>
           <FormsyText name = "newMessage"
                       validations = "isWords"
                       required
