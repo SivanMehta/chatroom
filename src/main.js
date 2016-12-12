@@ -20,6 +20,9 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import AccountIcon from 'material-ui/svg-icons/action/account-circle'
 
+// custom components
+import Room from './room'
+
 class Main extends React.Component {
   constructor(props) {
     super(props)
@@ -32,10 +35,13 @@ class Main extends React.Component {
   render() {
     return(
       <MuiThemeProvider>
-        <AppBar
+        <div>
+          <AppBar
             title="chatroom"
             iconElementLeft={ <Nav /> }
-          />
+            />
+          { this.props.children }
+        </div>
       </MuiThemeProvider>
     )
   }
@@ -51,12 +57,17 @@ class Nav extends React.Component {
 
   rooms() {
     // in the future, this would return some recommended rooms, but for now we can hard code them
-    return [
-      <ListItem key = { 1 } primaryText = "John" />,
-      <ListItem key = { 2 } primaryText = "Paul" />,
-      <ListItem key = { 3 } primaryText = "George" />,
-      <ListItem key = { 4 } primaryText = "Ringo" />
-    ]
+    const rooms = ['John', 'Paul', 'George', 'Ringo']
+    const result = rooms.map((room, i) => {
+      return(
+        <ListItem
+          key = { i }
+          primaryText = { room }
+          containerElement={ <Link to={ "/room/" + room }/> } />
+      )
+    })
+
+    return result
   }
 
   render() {
@@ -78,7 +89,9 @@ class Nav extends React.Component {
                         primaryTogglesNestedList = { true }
                         initiallyOpen = { false } />
               <Divider />
-              <ListItem primaryText = "Log out" leftIcon = { <ExitIcon /> }/>
+              <ListItem primaryText = "Log out"
+                leftIcon = { <ExitIcon /> }
+                containerElement = { <Link to = "/" /> } />
             </List>
         </Drawer>
       </div>
@@ -91,6 +104,9 @@ render((
     <Route path = "/" component = { Main }>
       <Route path = "profile" component = { Main } />
       <Route path = "settings" component = { Main } />
+      <Route path = "room">
+        <Route path = "/room/:roomId" component = { Room }/>
+      </Route>
     </Route>
   </Router>
 ), document.getElementById('app'))
