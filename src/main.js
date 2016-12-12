@@ -10,20 +10,41 @@ injectTapEventPlugin()
 // Custom Components
 import Greeting from './pieces/greeting'
 
+// Routing
+import { Router, Route, hashHistory } from 'react-router'
 
-export default class Main extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props)
+  }
 
+  renderBody() {
+    return (
+      <div>
+        <Greeting />
+        { this.props.children }
+      </div>
+    )
   }
 
   render() {
-    return (
+    return(
       <MuiThemeProvider>
-        <Greeting />
+        { this.renderBody() }
       </MuiThemeProvider>
     )
   }
 }
 
-render(<Main />, document.getElementById('app'))
+class Otherwise extends React.Component {
+  constructor(props) { super(props) }
+  render() { return( <span>nothing else</span> ) }
+}
+
+render((
+  <Router history = { hashHistory }>
+    <Route path="/" component = { Main }>
+      <Route path="/chatroom" component = { Otherwise }/>
+    </Route>
+  </Router>
+), document.getElementById('app'))

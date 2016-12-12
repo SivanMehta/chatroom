@@ -3,43 +3,47 @@ import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
 import Chip from 'material-ui/Chip'
 
+import { Link } from 'react-router'
+
 export default class Greeting extends React.Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props)
 
-        this.state = {
-            open: true,
-            alert: false
-        }
+    this.state = {
+      open: true,
+      alert: false
     }
+  }
 
-    renderChip() {
-      return this.state.alert ? (
-        <Chip onRequestDelete = { () => this.setState({alert: false}) }>
-          Login is not currently implemented
-        </Chip>
-      ) : ''
-    }
+  renderChip() {
+    return this.state.alert ? (
+      <Chip onRequestDelete = { () => this.setState({alert: false}) }>
+        Login is not currently implemented
+      </Chip>
+    ) : ''
+  }
 
-    render() {
-        const actions = [
-            <RaisedButton
-                label = "Login"
-                primary = { true }
-                onTouchTap = { () => { this.setState({alert: true}) } } >
+  render() {
+    const actions = [
+      <Link to = "/chatroom"
+            onTouchTap = { () => { this.setState({open: false}) } } >
+        <RaisedButton
+          label = "Enter Chat"
+          primary = { true } >
 
-            </RaisedButton>
-        ]
+        </RaisedButton>
+      </Link>
+    ]
 
-        return (
-            <div>
-                <Dialog title = "Welcome to the chatroom!"
-                        modal = { true }
-                        open = { this.state.open }
-                        actions = { actions }>
-                        Please press the button to continue { this.renderChip() }
-                </Dialog>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Dialog title = "Welcome to the chatroom!"
+                    modal = { true }
+                    open = { this.state.open }
+                    actions = { actions }>
+                    Please press the button to continue { this.renderChip() }
+            </Dialog>
+        </div>
+    )
+  }
 }
