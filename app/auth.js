@@ -1,12 +1,14 @@
 const path = require('path')
+const scrambler = require('./scrambler')
+const cookieName = words({ exactly: 5, join: '-' })
 
 function login(req, res) {
-  res.cookie('is-logged-in', true)
+  res.cookie(cookieName, scrambler.encrypt('logged in'))
   res.redirect("/")
 }
 
 function logout(req, res) {
-  res.clearCookie('is-logged-in')
+  res.clearCookie(cookieName)
   res.redirect("/")
 }
 
