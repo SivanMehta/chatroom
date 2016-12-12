@@ -11,10 +11,10 @@ injectTapEventPlugin()
 import Greeting from './pieces/greeting'
 
 
-export default class App extends React.Component {
+export default class Main extends React.Component {
   constructor(props) {
     super(props)
-    // set up inital application
+
   }
 
   render() {
@@ -26,4 +26,4 @@ export default class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById('app'))
+render(<Main />, document.getElementById('app'))
