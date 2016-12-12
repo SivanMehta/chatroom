@@ -491,6 +491,10 @@ big.js@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-3.1.3.tgz#4cada2193652eb3ca9ec8e55c9015669c9806978"
 
+bob-ross-lipsum:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/bob-ross-lipsum/-/bob-ross-lipsum-1.1.1.tgz#99a8d3b947c581973806aed209fcad165b22e44a"
+
 bowser@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/bowser/-/bowser-1.6.0.tgz#37fc387b616cb6aef370dab4d6bd402b74c5c54d"
@@ -592,6 +596,22 @@ find-up@^1.0.0:
     path-exists "^2.0.0"
     pinkie-promise "^2.0.0"
 
+form-data-to-object@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/form-data-to-object/-/form-data-to-object-0.2.0.tgz#f7a8e68ddd910a1100a65e25ac6a484143ff8168"
+
+formsy-material-ui:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/formsy-material-ui/-/formsy-material-ui-0.5.3.tgz#825c087ee2094218760be139e253bffe3963aa14"
+  dependencies:
+    keycode "^2.1.0"
+
+formsy-react:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-0.19.0.tgz#ac195bf6e53c24fef98423988daf3293e8c7030e"
+  dependencies:
+    form-data-to-object "^0.2.0"
+
 globals@^9.0.0:
   version "9.14.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.14.0.tgz#8859936af0038741263053b39d0e76ca241e4034"
@@ -676,7 +696,7 @@ json5@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
-keycode@^2.1.1:
+keycode@^2.1.0, keycode@^2.1.1:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.1.7.tgz#7b9255919f6cff562b09a064d222dca70b020f5c"
 

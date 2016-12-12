@@ -10,6 +10,9 @@ import Message from './pieces/message'
 // Material UI
 import { List } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
+import Formsy from 'formsy-react'
+import FormsyText from 'formsy-material-ui/lib/FormsyText'
+
 
 export default class Room extends React.Component {
   constructor(props) {
@@ -45,6 +48,13 @@ export default class Room extends React.Component {
         <List>
           { this.renderMessages() }
         </List>
+        <Formsy.Form>
+          <FormsyText name = "newMessage"
+                      validations = "isWords"
+                      required
+                      hintText = "Enter a message"
+                      style = { { width: '100%' } }/>
+        </Formsy.Form>
       </div>
     )
   }
