@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 app.use(require('body-parser').json())
 
 // Handle static files
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'client', 'public')))
 
 // routing for now
 app.get("/", (req, res) => {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo 'there are no test written' && exit 1",
-    "watch": "rm -rf public/dist/ && webpack --progress --watch"
+    "watch": "rm -rf client/public/dist/ && webpack --progress --watch"
   },
   "repository": {
     "type": "git",
