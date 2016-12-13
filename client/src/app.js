@@ -23,14 +23,14 @@ import AccountIcon from 'material-ui/svg-icons/action/account-circle'
 // custom components
 import Room from './room'
 import io from 'socket.io-client'
-let socket = io()
 
-class App extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      logged: false
+      logged: false,
+      socket: io('')
     }
   }
 
