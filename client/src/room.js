@@ -20,9 +20,19 @@ export default class Room extends React.Component {
     this.state = {
       messages: []
     }
+
+  }
+
+  componentDidMount() {
+    this.fetchMessages()
   }
 
   componentWillReceiveProps() {
+    this.fetchMessages()
+  }
+
+  fetchMessages() {
+    console.log("here")
     // in the future, this will fetch messages from the server,
     // but for now we're just generating them on the fly
     fetch('/api/rooms/' + this.props.params.roomId, { credentials: 'same-origin' })
