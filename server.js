@@ -1,5 +1,6 @@
 var express = require('express')
-var app = express();
+var app = express()
+const bodyParser = require('body-parser')
 const path = require('path')
 
 // logging
@@ -7,7 +8,8 @@ var morgan = require('morgan')
 app.use(morgan('dev'))
 
 // body and cookie parsing
-app.use(require('body-parser').json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 var cookieParser = app.use(require('cookie-parser')())
 
 // Handle static files
