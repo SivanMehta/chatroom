@@ -20,7 +20,6 @@ function authorize(req, res) {
 
 function is_logged_in(req, res, next) {
   const status = req.cookies[cookieName] ? scrambler.decrypt(req.cookies[cookieName]) : 'logged out'
-  console.log(status)
   status == 'logged in' ? next() : res.redirect("/login")
 }
 
@@ -37,7 +36,7 @@ exports.init = (app) => {
   app.get("/logout", logout)
 
   // rooms
-  app.get("/api/rooms/:roomId", rooms.getRoomMessages)
+  app.get("/api/rooms/:roomId", is_logged_in, rooms.getRoomMessages)
 
   // main application
   app.get("/", is_logged_in, (req, res) => {
