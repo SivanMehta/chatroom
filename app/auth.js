@@ -1,5 +1,6 @@
 const path = require('path')
 const scrambler = require('./scrambler')
+const rooms = require('./rooms')
 const words = require('random-words');
 const cookieName = words({ exactly: 5, join: '-' })
 
@@ -34,6 +35,9 @@ exports.init = (app) => {
   app.get("/login", login)
   app.post("/login", authorize)
   app.get("/logout", logout)
+
+  // rooms
+  app.get("/api/rooms/:roomId", rooms.getRoomMessages)
 
   // main application
   app.get("/", is_logged_in, (req, res) => {

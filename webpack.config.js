@@ -10,7 +10,7 @@ module.exports = [
 {
   name: 'JS',
   devtool: 'source-map',
-  entry: path.join(__dirname, 'client', 'src', 'main.js'),
+  entry: ['whatwg-fetch', path.join(__dirname, 'client', 'src', 'main.js')],
   output: {
     filename: path.join(dist, 'build', 'bundle.js')
   },

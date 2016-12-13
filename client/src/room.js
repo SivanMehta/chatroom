@@ -2,7 +2,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, Link, hashHistory } from 'react-router'
-import wisdom from 'bob-ross-lipsum'
 
 // custom components
 import Message from './pieces/message'
@@ -12,20 +11,24 @@ import { List } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Formsy from 'formsy-react'
 import FormsyText from 'formsy-material-ui/lib/FormsyText'
+import 'whatwg-fetch'
 
 export default class Room extends React.Component {
   constructor(props) {
-    super()
+    super(props)
 
+    this.state = {
+      messages: []
+    }
+  }
+
+  componentWillReceiveProps() {
     // in the future, this will fetch messages from the server,
     // but for now we're just generating them on the fly
-    var messages = []
-    for(var i = 0; i < Math.floor(Math.random() * 10) + 1; i ++) {
-      messages.push(wisdom())
-    }
-    this.state = {
-      messages: messages
-    }
+    fetch('/api/rooms/' + this.props.params.roomId, { credentials: 'same-origin' })
+      .then(res => res.json())
+      .then(json => json.messages)
+      .then(messages => this.setState({messages: messages}) )
   }
 
   sendMessage(data) {
@@ -33,6 +36,8 @@ export default class Room extends React.Component {
   }
 
   renderMessages() {
+    // you should actually have an indication of
+    // the messages are an empty array
     const result = this.state.messages.map((message, i) => {
       return(
         <Message content = { message }
