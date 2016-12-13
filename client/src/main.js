@@ -88,18 +88,17 @@ class Nav extends React.Component {
           open = { this.state.open }
           onRequestChange = { this.close } >
             <List>
-              <ListItem primaryText = "Profile" leftIcon = { <AccountIcon /> }/>
-              <ListItem primaryText = "Settings" leftIcon = { <SettingsIcon /> }/>
+              <ListItem primaryText = "Profile" rightIcon = { <AccountIcon /> }/>
+              <ListItem primaryText = "Settings" rightIcon = { <SettingsIcon /> }/>
               <ListItem primaryText = "Rooms"
-                        leftIcon = { <ChatIcon /> }
+                        rightIcon = { <ChatIcon /> }
                         nestedItems = { this.rooms() }
                         primaryTogglesNestedList = { true }
                         initiallyOpen = { false } />
               <Divider />
               <ListItem primaryText = "Log out"
-                leftIcon = { <ExitIcon /> }
-                containerElement = { <Link to = "/" /> }
-                onTouchTap = { this.close }/>
+                rightIcon = { <ExitIcon /> }
+                href = "/logout" />
             </List>
         </Drawer>
       </div>
