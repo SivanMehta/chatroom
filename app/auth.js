@@ -1,11 +1,10 @@
 const path = require('path')
-const scrambler = require('./scrambler')
+// const scrambler = require('./scrambler')
 const rooms = require('./rooms')
 const words = require('random-words');
-const cookieName = words({ exactly: 5, join: '-' })
+// const cookieName = words({ exactly: 5, join: '-' })
 
 function login(req, res) {
-  // res.cookie(cookieName, scrambler.encrypt('logged in'))
   res.sendFile(path.join(__dirname, '..', 'client', 'login.html'))
 }
 
@@ -14,17 +13,17 @@ function authorize(req, res) {
 
   // do some checking
 
-  res.cookie(cookieName, scrambler.encrypt('logged in'))
+  res.cookie('email', req.body.email)
   res.redirect("/")
 }
 
 function is_logged_in(req, res, next) {
-  const status = req.cookies[cookieName] ? scrambler.decrypt(req.cookies[cookieName]) : 'logged out'
-  status == 'logged in' ? next() : res.redirect("/login")
+  const status = req.cookies.email ? true : false
+  status ? next() : res.redirect("/login")
 }
 
 function logout(req, res) {
-  res.clearCookie(cookieName)
+  res.clearCookie('email')
   res.redirect("/login")
 }
 
