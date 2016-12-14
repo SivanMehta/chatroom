@@ -38,7 +38,8 @@ function initializeSocket(io) {
       const message  = {
         content: data.content,
         room: data.room,
-        time: moment()
+        time: moment(),
+        from: socket.handshake.headers.cookie.email
       }
       messages[data.room].push(message)
       io.sockets.emit('server:message')

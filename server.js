@@ -24,6 +24,8 @@ require('./app/auth').init(app)
 
 /* Socket.io Communication */
 var io = require('socket.io').listen(server)
+var socketCookieParser = require('socket.io-cookie')
+io.use(socketCookieParser)
 require('./app/rooms').initializeSocket(io)
 
 server.listen(PORT, () => {
