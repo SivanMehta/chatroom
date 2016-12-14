@@ -22,7 +22,7 @@ export default class Room extends React.Component {
     }
 
     socket.on('server:message', (message) => {
-      console.log(message)
+      this.fetchMessages()
     })
 
     this.sendMessage = this.sendMessage.bind(this)
@@ -58,9 +58,10 @@ export default class Room extends React.Component {
     // the messages are an empty array
     const result = this.state.messages.map((message, i) => {
       return(
-        <Message content = { message }
-                  key = { this.props.params.roomId + i }
-                  avatar = { i } />
+        <Message content = { message.content }
+                 time = { message.time }
+                 avatar = { i }
+                 key = { message.room + i } />
       )
     })
     return result

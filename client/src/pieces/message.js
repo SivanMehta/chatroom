@@ -4,6 +4,7 @@ import { Router, Route, Link, hashHistory } from 'react-router'
 
 import { ListItem } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
+import moment from 'moment'
 
 export default class Message extends React.Component {
   constructor() {
@@ -11,9 +12,11 @@ export default class Message extends React.Component {
   }
 
   render() {
+    const formattedTime = moment(this.props.time)
+                            .format("h:mma MMM Do")
     return(
       <ListItem primaryText = { this.props.content }
-                secondaryText = { 'sent just now' }
+                secondaryText = { formattedTime }
                 leftAvatar = {<Avatar src={'images/avatar' + (this.props.avatar % 4) + '.jpg'} />} />
     )
   }
