@@ -23,7 +23,7 @@ function is_logged_in(req, res, next) {
 }
 
 function logout(req, res) {
-  res.clearCookie('email')
+  ['email', 'io'].forEach(cookie => res.clearCookie(cookie))
   res.redirect("/login")
 }
 
