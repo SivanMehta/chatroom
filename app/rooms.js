@@ -11,7 +11,8 @@ rooms.forEach(room => {
     const message  = {
       content: wisdom(),
       room: room,
-      time: moment()
+      time: moment(),
+      from: 'bob-ross-lipsum@npm.org'
     }
     messages[room].push(message)
   }

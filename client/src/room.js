@@ -61,7 +61,8 @@ export default class Room extends React.Component {
         <Message content = { message.content }
                  time = { message.time }
                  avatar = { i }
-                 key = { message.room + i } />
+                 key = { message.room + i }
+                 from = { message.from } />
       )
     })
     return result

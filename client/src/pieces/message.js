@@ -16,7 +16,7 @@ export default class Message extends React.Component {
                             .format("h:mma MMM Do")
     return(
       <ListItem primaryText = { this.props.content }
-                secondaryText = { formattedTime }
+                secondaryText = { this.props.from + " @ " + formattedTime }
                 leftAvatar = {<Avatar src={'images/avatar' + (this.props.avatar % 4) + '.jpg'} />} />
     )
   }
