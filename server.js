@@ -24,7 +24,7 @@ require('./app/auth').init(app)
 
 /* Socket.io Communication */
 var io = require('socket.io').listen(server)
-io.on('connection', require('./app/chatSocket'))
+require('./app/chatSocket').init(io)
 
 server.listen(PORT, () => {
     console.log("Server started on port " + PORT)

@@ -3,7 +3,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, Link, hashHistory } from 'react-router'
 
-// custom components
+// additional components
 import Message from './pieces/message'
 
 // Material UI
@@ -21,6 +21,11 @@ export default class Room extends React.Component {
       messages: []
     }
 
+    socket.on('server:message', (message) => {
+      console.log(message)
+    })
+
+    this.sendMessage = this.sendMessage.bind(this)
   }
 
   componentDidMount() {
@@ -41,7 +46,11 @@ export default class Room extends React.Component {
   }
 
   sendMessage(data) {
-    console.log(data)
+    const message = {
+      content: data.newMessage,
+      room: this.props.params.roomId
+    }
+    socket.emit('client:message', message)
   }
 
   renderMessages() {
