@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo 'there are no test written' && exit 1",
     "watch": "rm -rf client/public/dist/ && webpack --progress --watch",
-    "deploy": "webpack && npm start"
+    "deploy": "webpack --progress && npm start"
   },
   "repository": {
     "type": "git",
