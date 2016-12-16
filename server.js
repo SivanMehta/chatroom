@@ -15,9 +15,6 @@ var cookieParser = app.use(require('cookie-parser')())
 // Handle static files
 app.use(express.static(path.join(__dirname, 'client', 'public')))
 
-// compress outgoing files
-app.use(require('compression')())
-
 const PORT = process.env.PORT || 8080
 app.set('port', PORT)
 var server = require('http').Server(app)
