@@ -15,13 +15,19 @@ var cookieParser = app.use(require('cookie-parser')())
 // Handle static files
 app.use(express.static(path.join(__dirname, 'client', 'public')))
 
-// authentication handling
-require('./app/auth').init(app)
-
 const PORT = process.env.PORT || 8080
 app.set('port', PORT)
+var server = require('http').Server(app)
 
-var http = require('http').Server(app)
-http.listen(PORT, () => {
+// external routes
+require('./app/auth').init(app)
+
+/* Socket.io Communication */
+var io = require('socket.io').listen(server)
+var socketCookieParser = require('socket.io-cookie')
+io.use(socketCookieParser)
+require('./app/rooms').initializeSocket(io)
+
+server.listen(PORT, () => {
     console.log("Server started on port " + PORT)
 })

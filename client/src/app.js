@@ -20,7 +20,7 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import AccountIcon from 'material-ui/svg-icons/action/account-circle'
 
-// custom components
+// additional components
 import Room from './room'
 
 class Main extends React.Component {
