@@ -88,7 +88,7 @@ export default class Room extends React.Component {
         </List>
         <Formsy.Form onValidSubmit = { this.sendMessage }>
           <FormsyText name = "newMessage"
-                      validations = "isWords"
+                      required
                       hintText = "Enter a message"
                       ref = "form"
                       style = { { width: '100%' } }/>
