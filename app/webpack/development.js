@@ -17,7 +17,6 @@ exports.init = (dirname) => {
       filename: path.join(dist, 'build', 'bundle.js')
     },
     plugins: [
-      new webpack.optimize.DedupePlugin(),
       new webpack.ProvidePlugin({
           "react": "React",
       })

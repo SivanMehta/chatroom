@@ -3,7 +3,6 @@
 const webpack = require('webpack')
 const path = require('path')
 
-
 exports.init = (dirname) => {
   const LANG = process.env.LANG || 'en-US'
   const dist = path.join(dirname, 'client', 'public', 'dist')
@@ -18,7 +17,11 @@ exports.init = (dirname) => {
     plugins: [
       new webpack.optimize.DedupePlugin(),
       new webpack.ProvidePlugin({
-          "react": "React",
+          "react": "React"
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+          compress: true,
+          comments: false
       })
     ],
 
