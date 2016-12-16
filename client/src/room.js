@@ -7,7 +7,8 @@ import { Router, Route, Link, hashHistory } from 'react-router'
 import Message from './pieces/message'
 
 // Material UI
-import { List } from 'material-ui/List'
+import { List, ListItem } from 'material-ui/List'
+import Divider from 'material-ui/Divider'
 import Avatar from 'material-ui/Avatar'
 import Formsy from 'formsy-react'
 import FormsyText from 'formsy-material-ui/lib/FormsyText'
@@ -51,6 +52,7 @@ export default class Room extends React.Component {
       room: this.props.params.roomId
     }
     socket.emit('client:message', message)
+    this.refs.form.resetValue()
   }
 
   renderMessages() {
@@ -70,17 +72,25 @@ export default class Room extends React.Component {
 
   render() {
 
+    const titleText = (
+      <span>
+        This is a room for <b>{ this.props.params.roomId }</b>
+      </span>
+    )
+
     return(
       <div>
-        <span>This is a room for { this.props.params.roomId }</span>
         <List>
+          <ListItem
+            primaryText = { titleText }/>
+          <Divider />
           { this.renderMessages() }
         </List>
         <Formsy.Form onValidSubmit = { this.sendMessage }>
           <FormsyText name = "newMessage"
                       validations = "isWords"
-                      required
                       hintText = "Enter a message"
+                      ref = "form"
                       style = { { width: '100%' } }/>
         </Formsy.Form>
       </div>
