@@ -2,11 +2,12 @@
   "name": "reference-project",
   "version": "1.0.0",
   "description": "Just using as many different Node.js libraries / techniques as possible so I have a centralized place to reference code.",
-  "main": "index.js",
+  "main": "app/server.js",
   "scripts": {
     "test": "echo 'there are no test written' && exit 1",
     "watch": "rm -rf client/public/dist/ && webpack --progress --watch",
-    "deploy": "webpack --progress && npm start"
+    "deploy": "webpack --progress && npm start",
+    "start": "node app/server.js"
   },
   "repository": {
     "type": "git",
