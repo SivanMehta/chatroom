@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 app.use(require('cookie-parser')())
 
 // Handle static files
-app.use(express.static(path.join(__dirname, 'client', 'public')))
+app.use(express.static(path.join(__dirname, '..', 'client', 'public')))
 
 const PORT = process.env.PORT || 8080
 app.set('port', PORT)
@@ -24,8 +24,8 @@ require('./auth').init(app)
 
 /* Socket.io Communication */
 var io = require('socket.io').listen(server)
-const socketCookieParser = require('socket.io-cookie')
-io.use(socketCookieParser())
+var socketCookieParser = require('socket.io-cookie')
+io.use(socketCookieParser)
 require('./rooms').initializeSocket(io)
 
 server.listen(PORT, () => {
