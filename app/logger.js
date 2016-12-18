@@ -6,4 +6,10 @@ var logger = new (winston.Logger)({
   ]
 })
 
+logger.stream = {
+    write: function(message, encoding){
+        logger.debug(message);
+    }
+};
+
 module.exports = logger
