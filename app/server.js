@@ -15,6 +15,11 @@ app.use(require('cookie-parser')())
 // Handle static files
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')))
 
+// logging
+const logger = require('./logger')
+const env = process.env.NODE_ENV || 'development'
+logger.level = env === 'development' ? 'debug' : 'info'
+
 const PORT = process.env.PORT || 8080
 app.set('port', PORT)
 var server = require('http').Server(app)
@@ -29,5 +34,5 @@ io.use(socketCookieParser)
 require('./rooms').initializeSocket(io)
 
 server.listen(PORT, () => {
-    console.log("Server started on port " + PORT)
+    logger.info("Server started on port " + PORT)
 })

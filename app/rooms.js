@@ -1,5 +1,6 @@
 const wisdom = require('bob-ross-lipsum')
 const moment = require('moment')
+const logger = require('./logger')
 
 // this should be a database, but for now we'll do
 // persistence in-memory
@@ -30,9 +31,9 @@ function getRoomMessages(req, res) {
 function initializeSocket(io) {
   io.on('connection', (socket) => {
     // at the point, users are connected
-    console.log(socket.id, 'connected')
+    logger.debug(socket.id, 'connected')
     socket.on('disconnect', () => {
-      console.log(socket.id, 'disconnected')
+      logger.debug(socket.id, 'disconnected')
     })
 
     socket.on('client:message', (data) => {

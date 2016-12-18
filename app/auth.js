@@ -1,7 +1,8 @@
 const path = require('path')
 // const scrambler = require('./scrambler')
+const words = require('random-words')
 const rooms = require('./rooms')
-const words = require('random-words');
+const logger = require('./logger')
 // const cookieName = words({ exactly: 5, join: '-' })
 
 function login(req, res) {
@@ -9,7 +10,7 @@ function login(req, res) {
 }
 
 function authorize(req, res) {
-  console.log(req.body)
+  logger.debug(req.body)
 
   // do some checking
 
