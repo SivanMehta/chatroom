@@ -36,6 +36,7 @@ exports.init = (app) => {
   // rooms
   app.get("/api/rooms/:roomId", is_logged_in, room.getRoomMessages)
   app.get("/api/profiles", is_logged_in, profile.getProfile)
+  app.get("/api/settings", is_logged_in, profile.getSettings)
 
   // main application
   app.get("/", is_logged_in, (req, res) => {
