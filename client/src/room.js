@@ -38,8 +38,6 @@ export default class Room extends React.Component {
   }
 
   fetchMessages() {
-    // in the future, this will fetch messages from the server,
-    // but for now we're just generating them on the fly
     fetch('/api/rooms/' + this.props.params.roomId, { credentials: 'same-origin' })
       .then(res => res.json())
       .then(json => json.messages)
@@ -88,7 +86,7 @@ export default class Room extends React.Component {
         </List>
         <Formsy.Form onValidSubmit = { this.sendMessage }>
           <FormsyText name = "newMessage"
-                      validations = "isWords"
+                      required
                       hintText = "Enter a message"
                       ref = "form"
                       style = { { width: '100%' } }/>
