@@ -1,6 +1,6 @@
 const faker = require('faker')
 const moment = require('moment')
-const logger = require('./logger')
+const logger = require('../logger')
 
 // this should be a database, but for now we'll do
 // persistence in-memory
