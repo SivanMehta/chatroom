@@ -35,13 +35,9 @@ export default class Settings extends React.Component {
   componentDidMount() {
     fetch('/api/settings', { credentials: 'same-origin' })
       .then(res => res.json())
-      .then(settings => this.setState({
-        rendered: true,
-        autocomplete: settings.autocomplete,
-        language: settings.language,
-        email: settings.email,
-        status: settings.status
-      }))
+      .then(settings => this.setState(Object.assign(settings, {
+        rendered: true
+      })))
   }
 
   saveSettings() {
@@ -69,14 +65,14 @@ export default class Settings extends React.Component {
 
     return(
       <div style = { style }>
-        <p>
+        <div>
           <Checkbox
             label = "Autocomplete"
             defaultChecked = { this.state.autocomplete }
             onCheck = {(e, v) => this.setState({autocomplete: v})}
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <SelectField
             value = {this.state.language}
             onChange = {(e, i, v) => this.setState({language: v})}
@@ -85,15 +81,8 @@ export default class Settings extends React.Component {
               <MenuItem key = {'Nerd'} value = {'Nerd'} primaryText = "Nerd" />
               <MenuItem key = {'Klingon'} value = {'Klingon'} primaryText = "Klingon" />
           </SelectField>
-        </p>
-        <p>
-          <TextField
-            defaultValue = { this.state.email }
-            floatingLabelText = "Email"
-            onChange = { (e) => this.setState({email: e.target.value})}
-          />
-      </p>
-        <p>
+        </div>
+        <div>
           <Checkbox
             checkedIcon = { <Visibility /> }
             uncheckedIcon = { <VisibilityOff /> }
@@ -101,19 +90,18 @@ export default class Settings extends React.Component {
             label  =  { (this.state.status ? 'On': 'Off') + 'line'}
             onCheck = { (e, v) => this.setState({status: v}) }
           />
-      </p>
-        <p>
+        </div>
+        <div>
           <RaisedButton
             label = "Submit"
             labelPosition = "before"
             backgroundColor = "#C5E1A5"
-            hoverColor = "#C5E1A5"
             icon = { this.renderIcon() }
             onTouchTap = { this.saveSettings }/>
-        </p>
-        <p>
+        </div>
+        <div>
           { JSON.stringify(this.state) }
-        </p>
+        </div>
       </div>
     )
   }

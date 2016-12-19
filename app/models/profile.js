@@ -20,7 +20,6 @@ function getSettings(req, res) {
   const settings = {
     autocomplete: true,
     language: 'English',
-    email: req.cookies.email,
     status: true
   }
 
