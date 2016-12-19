@@ -7,8 +7,8 @@ function getProfile(req, res) {
     email: req.cookies.email,
     avatar: faker.internet.avatar(),
     company: faker.company.companyName(),
-    motto: faker.hacker.phrase(),
-    mantra: faker.lorem.paragraph(),
+    motto: faker.company.catchPhrase(),
+    mantra: faker.lorem.paragraphs(),
     background: faker.image.city()
   }
 

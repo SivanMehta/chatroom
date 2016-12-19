@@ -6,7 +6,7 @@ import 'whatwg-fetch'
 // Material UI
 import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import AccountIcon from 'material-ui/svg-icons/action/account-circle'
-import RenewIcon from 'material-ui/svg-icons/action/autorenew'
+import CircularProgress from 'material-ui/CircularProgress'
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ export default class Profile extends React.Component {
     return this.state.rendered ? (
       this.renderAccount()
     ) : (
-      <RenewIcon />
+      <CircularProgress />
     )
   }
 }
