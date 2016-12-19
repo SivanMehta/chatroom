@@ -31,7 +31,7 @@ require('./auth').init(app)
 var io = require('socket.io').listen(server)
 var socketCookieParser = require('socket.io-cookie')
 io.use(socketCookieParser)
-require('./rooms').initializeSocket(io)
+require('./models/room').initializeSocket(io)
 
 // start service
 server.listen(PORT, () => {
