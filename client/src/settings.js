@@ -15,7 +15,7 @@ import VisibilityOff from 'material-ui/svg-icons/action/visibility-off'
 
 // save button specific imports
 import SaveIcon from 'material-ui/svg-icons/content/save'
-import CheckCircle from 'material-ui/svg-icons/action/check-circle'
+import DoneIcon from 'material-ui/svg-icons/action/done'
 import { green900 } from 'material-ui/styles/colors'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -54,7 +54,7 @@ export default class Settings extends React.Component {
         case 1:
           return <CircularProgress size = { 24 } color = { green900 } />
         case 2:
-          return <CheckCircle color = { green900 } />
+          return <DoneIcon color = { green900 } />
       }
   }
 
