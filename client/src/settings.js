@@ -15,6 +15,7 @@ import VisibilityOff from 'material-ui/svg-icons/action/visibility-off'
 
 // save button specific imports
 import SaveIcon from 'material-ui/svg-icons/content/save'
+import CheckCircle from 'material-ui/svg-icons/action/check-circle'
 import { green900 } from 'material-ui/styles/colors'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -24,8 +25,11 @@ export default class Settings extends React.Component {
 
     this.state = {
       rendered: false,
-      persisting: false
+      persisting: 0
     }
+
+    this.saveSettings = this.saveSettings.bind(this)
+
   }
 
   componentDidMount() {
@@ -38,6 +42,24 @@ export default class Settings extends React.Component {
         email: settings.email,
         status: settings.status
       }))
+  }
+
+  saveSettings() {
+    this.setState({ persisting: 1 })
+
+    // simulating persisting to the server
+    setTimeout(() => this.setState({ persisting: 2 }), 5000)
+  }
+
+  renderIcon() {
+    switch (this.state.persisting) {
+        case 0:
+          return <SaveIcon color = { green900 } />
+        case 1:
+          return <CircularProgress size = { 24 } color = { green900 } />
+        case 2:
+          return <CheckCircle color = { green900 } />
+      }
   }
 
   renderSettings() {
@@ -86,7 +108,8 @@ export default class Settings extends React.Component {
             labelPosition = "before"
             backgroundColor = "#C5E1A5"
             hoverColor = "#C5E1A5"
-            icon = { <SaveIcon color = { green900 }/> }/>
+            icon = { this.renderIcon() }
+            onTouchTap = { this.saveSettings }/>
         </p>
         <p>
           { JSON.stringify(this.state) }
