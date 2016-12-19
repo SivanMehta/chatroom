@@ -13,12 +13,18 @@ import TextField from 'material-ui/TextField'
 import Visibility from 'material-ui/svg-icons/action/visibility'
 import VisibilityOff from 'material-ui/svg-icons/action/visibility-off'
 
+// save button specific imports
+import SaveIcon from 'material-ui/svg-icons/content/save'
+import { green900 } from 'material-ui/styles/colors'
+import RaisedButton from 'material-ui/RaisedButton'
+
 export default class Settings extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      rendered: false
+      rendered: false,
+      persisting: false
     }
   }
 
@@ -35,16 +41,20 @@ export default class Settings extends React.Component {
   }
 
   renderSettings() {
+    const style = {
+      marginLeft: '33.33%'
+    }
+
     return(
-      <List>
-        <ListItem>
+      <div style = { style }>
+        <p>
           <Checkbox
             label = "Autocomplete"
             defaultChecked = { this.state.autocomplete }
             onCheck = {(e, v) => this.setState({autocomplete: v})}
           />
-        </ListItem>
-        <ListItem>
+        </p>
+        <p>
           <SelectField
             value = {this.state.language}
             onChange = {(e, i, v) => this.setState({language: v})}
@@ -53,15 +63,15 @@ export default class Settings extends React.Component {
               <MenuItem key = {'Nerd'} value = {'Nerd'} primaryText = "Nerd" />
               <MenuItem key = {'Klingon'} value = {'Klingon'} primaryText = "Klingon" />
           </SelectField>
-        </ListItem>
-        <ListItem>
+        </p>
+        <p>
           <TextField
             defaultValue = { this.state.email }
             floatingLabelText = "Email"
             onChange = { (e) => this.setState({email: e.target.value})}
           />
-        </ListItem>
-        <ListItem>
+      </p>
+        <p>
           <Checkbox
             checkedIcon = { <Visibility /> }
             uncheckedIcon = { <VisibilityOff /> }
@@ -69,11 +79,19 @@ export default class Settings extends React.Component {
             label  =  { (this.state.status ? 'On': 'Off') + 'line'}
             onCheck = { (e, v) => this.setState({status: v}) }
           />
-        </ListItem>
-        <ListItem>
+      </p>
+        <p>
+          <RaisedButton
+            label = "Submit"
+            labelPosition = "before"
+            backgroundColor = "#C5E1A5"
+            hoverColor = "#C5E1A5"
+            icon = { <SaveIcon color = { green900 }/> }/>
+        </p>
+        <p>
           { JSON.stringify(this.state) }
-        </ListItem>
-      </List>
+        </p>
+      </div>
     )
   }
 
