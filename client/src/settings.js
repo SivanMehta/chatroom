@@ -9,6 +9,9 @@ import { List, ListItem } from 'material-ui/List'
 import Checkbox from 'material-ui/Checkbox'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
+import TextField from 'material-ui/TextField'
+import Visibility from 'material-ui/svg-icons/action/visibility'
+import VisibilityOff from 'material-ui/svg-icons/action/visibility-off'
 
 export default class Settings extends React.Component {
   constructor(props) {
@@ -50,6 +53,22 @@ export default class Settings extends React.Component {
               <MenuItem key = {'Nerd'} value = {'Nerd'} primaryText = "Nerd" />
               <MenuItem key = {'Klingon'} value = {'Klingon'} primaryText = "Klingon" />
           </SelectField>
+        </ListItem>
+        <ListItem>
+          <TextField
+            defaultValue = { this.state.email }
+            floatingLabelText = "Email"
+            onChange = { (e) => this.setState({email: e.target.value})}
+          />
+        </ListItem>
+        <ListItem>
+          <Checkbox
+            checkedIcon = { <Visibility /> }
+            uncheckedIcon = { <VisibilityOff /> }
+            defaultChecked = { this.state.status }
+            label  =  { (this.state.status ? 'On': 'Off') + 'line'}
+            onCheck = { (e, v) => this.setState({status: v}) }
+          />
         </ListItem>
         <ListItem>
           { JSON.stringify(this.state) }

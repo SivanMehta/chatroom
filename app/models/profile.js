@@ -19,9 +19,9 @@ function getProfile(req, res) {
 function getSettings(req, res) {
   const settings = {
     autocomplete: true,
-    language: 'en',
+    language: 'English',
     email: req.cookies.email,
-    status: 'online'
+    status: true
   }
 
   res.send(settings)
