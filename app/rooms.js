@@ -1,4 +1,4 @@
-const wisdom = require('bob-ross-lipsum')
+const faker = require('faker')
 const moment = require('moment')
 const logger = require('./logger')
 
@@ -10,10 +10,10 @@ rooms.forEach(room => {
   messages[room] = []
   for(var i = 0; i < Math.floor(Math.random() * 10) + 1; i ++) {
     const message  = {
-      content: wisdom(),
+      content: faker.hacker.phrase(),
       room: room,
       time: moment(),
-      from: 'bob-ross-lipsum@npm.org'
+      from: faker.internet.email()
     }
     messages[room].push(message)
   }
