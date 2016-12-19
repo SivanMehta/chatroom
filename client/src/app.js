@@ -22,6 +22,7 @@ import AccountIcon from 'material-ui/svg-icons/action/account-circle'
 
 // additional components
 import Room from './room'
+import Profile from './profile'
 
 class Main extends React.Component {
   constructor(props) {
@@ -88,8 +89,13 @@ class Nav extends React.Component {
           open = { this.state.open }
           onRequestChange = { this.close } >
             <List>
-              <ListItem primaryText = "Profile" rightIcon = { <AccountIcon /> }/>
-              <ListItem primaryText = "Settings" rightIcon = { <SettingsIcon /> }/>
+              <ListItem primaryText = "Profile"
+                        rightIcon = { <AccountIcon /> }
+                        containerElement={ <Link to = { "/profile/" }/> } />
+
+              <ListItem primaryText = "Settings"
+                        rightIcon = { <SettingsIcon /> } />
+
               <ListItem primaryText = "Rooms"
                         rightIcon = { <ChatIcon /> }
                         nestedItems = { this.rooms() }
@@ -109,7 +115,7 @@ class Nav extends React.Component {
 render((
   <Router history = { hashHistory }>
     <Route path = "/" component = { Main }>
-      <Route path = "profile" component = { Main } />
+      <Route path = "profile" component = { Profile } />
       <Route path = "settings" component = { Main } />
       <Route path = "room">
         <Route path = "/room/:roomId" component = { Room }/>
