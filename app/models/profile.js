@@ -1,7 +1,8 @@
 const faker = require('faker')
 
-// ideally this would be pulled form the database,
+// ideally these would be pulled form the database,
 // but for now we can just generate on the fly
+//
 function getProfile(req, res) {
   const profile = {
     email: req.cookies.email,
@@ -15,6 +16,18 @@ function getProfile(req, res) {
   res.send(profile)
 }
 
+function getSettings(req, res) {
+  const settings = {
+    autocomplete: true,
+    language: 'en',
+    email: req.cookies.email,
+    status: 'online'
+  }
+
+  res.send(settings)
+}
+
 module.exports = {
-  getProfile
+  getProfile,
+  getSettings
 }
