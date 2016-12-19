@@ -1,9 +1,7 @@
 const path = require('path')
-// const scrambler = require('./scrambler')
-const words = require('random-words')
-const rooms = require('./rooms')
+const room = require('./models/room')
+const profile = require('./models/profile')
 const logger = require('./logger')
-// const cookieName = words({ exactly: 5, join: '-' })
 
 function login(req, res) {
   res.sendFile(path.join(__dirname, '..', 'client', 'login.html'))
@@ -36,7 +34,8 @@ exports.init = (app) => {
   app.get("/logout", logout)
 
   // rooms
-  app.get("/api/rooms/:roomId", is_logged_in, rooms.getRoomMessages)
+  app.get("/api/rooms/:roomId", is_logged_in, room.getRoomMessages)
+  app.get("/api/profiles", is_logged_in, profile.getProfile)
 
   // main application
   app.get("/", is_logged_in, (req, res) => {
