@@ -45,10 +45,15 @@ export default class Profile extends React.Component {
   }
 
   render() {
+    const style = {
+      marginLeft: '50%',
+      top: '64px'
+    }
+
     return this.state.rendered ? (
       this.renderAccount()
     ) : (
-      <CircularProgress />
+      <CircularProgress style = { style }/>
     )
   }
 }
