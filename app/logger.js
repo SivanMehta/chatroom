@@ -11,5 +11,6 @@ logger.stream = {
         logger.debug(message)
     }
 }
+logger.level = 'debug'
 
 module.exports = logger
