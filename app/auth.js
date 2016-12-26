@@ -37,8 +37,8 @@ exports.init = (app) => {
   // api-driven routes
   app.get("/api/profiles", is_logged_in, profile.getProfile)
   app.get("/api/settings", is_logged_in, profile.getSettings)
-  app.get('/api/rooms/:roomID', db.getRoomMessages)
-  app.get("/api/search", db.searchMessages)
+  app.get('/api/rooms/:roomID', is_logged_in, db.getRoomMessages)
+  app.get("/api/search", is_logged_in, db.searchMessages)
 
   // serve react application
   app.get("/", is_logged_in, (req, res) => {

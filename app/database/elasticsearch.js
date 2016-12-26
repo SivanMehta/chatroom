@@ -38,7 +38,6 @@ exports.searchMessages = (query, callback) => {
 }
 
 exports.getRoomMessages = (room, callback) => {
-  console.log(room)
   client.search({
     body: {
       query: {
