@@ -4,8 +4,8 @@ var client = new elasticsearch.Client({
   host: 'localhost:9200',
   log: { levels: ['error', 'warning'] }
 })
-exports.client = client
 
+exports.client = client
 const indexName = 'messages'
 
 /**
@@ -28,6 +28,13 @@ exports.initIndex = () => {
 */
 exports.indexExists = () => {
   return client.indices.exists({ index: indexName })
+}
+
+exports.searchMessages = (query, callback) => {
+  client.search({
+    index: indexName,
+    q: 'content:*' + query + "*"
+  }, callback)
 }
 
 exports.addMessage = (message) => {

@@ -30,3 +30,17 @@ es.indexExists()
       })
     })
   })
+
+exports.searchMessages = (req, res) => {
+  if(!req.query.q) {
+    res.send([])
+  } else {
+    es.searchMessages(req.query.q, (err, response) => {
+      if(err) {
+        logger.error(err)
+      } else {
+        res.send(response.hits.hits)
+      }
+    })
+  }
+}
