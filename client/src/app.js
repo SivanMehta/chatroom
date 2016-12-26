@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import Drawer from 'material-ui/Drawer'
-import Popover from 'material-ui/Popover'
+import Popover, {PopoverAnimationHorizontal} from 'material-ui/Popover';
 import { List, ListItem } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 
@@ -19,6 +19,7 @@ import ChatIcon from 'material-ui/svg-icons/communication/chat'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import AccountIcon from 'material-ui/svg-icons/action/account-circle'
+import SearchIcon from 'material-ui/svg-icons/action/search'
 
 // additional components
 import Room from './room'
@@ -39,12 +40,39 @@ class Main extends React.Component {
       <MuiThemeProvider>
         <div>
           <AppBar
-            title="chatroom"
+            title="Chatroom"
             iconElementLeft={ <Nav /> }
+            iconElementRight = { <Search /> }
             />
           { this.props.children }
         </div>
       </MuiThemeProvider>
+    )
+  }
+}
+
+class Search extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      active : false,
+      query : "asuh dude"
+    }
+  }
+
+  render() {
+    return(
+      <div>
+        <SearchIcon onTouchTap = {() => this.setState({active: true}) }/>
+        <Popover
+          open = { this.state.active }
+          onRequestClose = {() => this.setState({ active: false })}
+          anchorOrigin = {{horizontal: 'right', vertical: 'top'}}
+          targetOrigin = {{horizontal: 'right', vertical: 'top'}} >
+          { this.state.query }
+        </Popover>
+      </div>
     )
   }
 }
