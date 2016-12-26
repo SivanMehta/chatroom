@@ -31,7 +31,7 @@ exports.indexExists = () => {
 }
 
 exports.addMessage = (message) => {
-  logger.debug('\tadding', message.from)
+  logger.debug('adding dummy message from', message.from)
   client.create({
     index: indexName,
     type: "message",
@@ -47,8 +47,6 @@ exports.addMessage = (message) => {
   }, (err, response) => {
     if(err) {
       logger.error(err)
-    } else {
-      logger.debug(response)
     }
   })
 }

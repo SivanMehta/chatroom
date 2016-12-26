@@ -21,7 +21,7 @@ es.indexExists()
   .then(es.initMapping)
   .then(() => {
     logger.debug('populating index')
-    Array(Math.floor(Math.random() * 20) + 1).fill(1).map((e, i) => {
+    Array(11).fill(1).map((e, i) => {
       return es.addMessage({
         content: faker.hacker.phrase(),
         room: rooms[i % 4],
