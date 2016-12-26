@@ -1,3 +1,4 @@
+const logger = require('../logger')
 var elasticsearch = require('elasticsearch')
 var client = new elasticsearch.Client({
   host: 'localhost:9200',
@@ -11,56 +12,64 @@ const indexName = 'messages'
 * Delete an index
 */
 exports.deleteIndex = () => {
-    return client.indices.delete({ index: indexName })
+  return client.indices.delete({ index: indexName })
 }
 
 /**
 * create an index
 */
 exports.initIndex = () => {
-    return client.indices.create({ index: indexName })
+  logger.debug('initalizing index')
+  return client.indices.create({ index: indexName })
 }
 
 /**
 * check if an index exists
 */
 exports.indexExists = () => {
-    return client.indices.exists({ index: indexName })
+  return client.indices.exists({ index: indexName })
 }
 
-exports.addDocument (document) => {
-    return elasticClient.index({
-        index: indexName,
-        type: "document",
-        body: {
-            content: document.content,
-            from: document.from,
-            room: document.room,
-            time: document.time,
-            suggest: {
-                input: document.content.split(" "),
-                output: document.content
-            }
-        }
-    });
+exports.addMessage = (message) => {
+  logger.debug('\tadding', message.from)
+  client.create({
+    index: indexName,
+    type: "message",
+    id: message.room + message.time,
+    body: {
+      content: message.content,
+      from: message.from,
+      room: message.room,
+      suggest: {
+        input: message.content.split(" ")
+      }
+    }
+  }, (err, response) => {
+    if(err) {
+      logger.error(err)
+    } else {
+      logger.debug(response)
+    }
+  })
 }
 
 exports.initMapping = () => {
-    return client.indices.putMapping({
-        index: indexName,
-        type: "document",
-        body: {
-            properties: {
-                content: { type: "string" },
-                from: { type: "string" },
-                room: { type: "string" },
-                time: { type: "date" }
-                suggest: {
-                    type: "completion",
-                    analyzer: "simple",
-                    search_analyzer: "simple"
-                }
-            }
+  logger.debug('initalizing mapping')
+  return client.indices.putMapping({
+    index: indexName,
+    type: "message",
+    body: {
+      properties: {
+        content: { type: "string" },
+        from: { type: "string" },
+        room: { type: "string" },
+        time: { type: "date" },
+        suggest: {
+          type: "completion",
+          analyzer: "simple",
+          search_analyzer: "simple"
         }
-    });
+      }
+    }
+  })
 }
