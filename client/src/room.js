@@ -23,7 +23,9 @@ export default class Room extends React.Component {
     }
 
     socket.on('server:message', (message) => {
-      this.fetchMessages()
+      this.setState({
+        messages: this.state.messages.concat(message)
+      })
     })
 
     this.sendMessage = this.sendMessage.bind(this)
