@@ -1,6 +1,7 @@
 const faker = require('faker')
 const moment = require('moment')
 const logger = require('../logger')
+const es = require('../database/elasticsearch')
 
 function initializeSocket(io) {
   io.on('connection', (socket) => {
@@ -14,9 +15,10 @@ function initializeSocket(io) {
       const message  = {
         content: data.content,
         room: data.room,
-        time: moment(),
+        time: moment().toISOString(),
         from: socket.handshake.headers.cookie.email
       }
+      es.addMessage(message)
       io.sockets.emit('server:message', message)
     })
   })

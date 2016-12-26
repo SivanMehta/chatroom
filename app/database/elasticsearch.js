@@ -41,9 +41,10 @@ exports.getRoomMessages = (room, callback) => {
   client.search({
     body: {
       query: {
-        match: {
-          room: room
-        }
+        match: { room: room }
+      },
+      sort: {
+        time: { order: 'asc' }
       }
     },
     size: 20
