@@ -40,7 +40,6 @@ export default class Room extends React.Component {
   fetchMessages() {
     fetch('/api/rooms/' + this.props.params.roomId, { credentials: 'same-origin' })
       .then(res => res.json())
-      .then(json => json.messages)
       .then(messages => this.setState({messages: messages}) )
   }
 
