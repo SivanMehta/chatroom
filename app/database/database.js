@@ -44,3 +44,20 @@ exports.searchMessages = (req, res) => {
     })
   }
 }
+
+exports.getRoomMessages = (req, res) => {
+  es.getRoomMessages(req.params.roomID, (err, response) => {
+    if(err) {
+      logger.error(err)
+    } else {
+      res.send(response.hits.hits.map(message => {
+        return {
+          content: message._source.content,
+          from: message._source.from,
+          room: message._source.room,
+          time: message._source.time
+        }
+      }))
+    }
+  })
+}

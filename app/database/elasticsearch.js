@@ -37,6 +37,20 @@ exports.searchMessages = (query, callback) => {
   }, callback)
 }
 
+exports.getRoomMessages = (room, callback) => {
+  console.log(room)
+  client.search({
+    body: {
+      query: {
+        match: {
+          room: room
+        }
+      }
+    },
+    size: 20
+  }, callback)
+}
+
 exports.addMessage = (message) => {
   logger.debug('adding dummy message from', message.from)
   client.create({
@@ -47,6 +61,7 @@ exports.addMessage = (message) => {
       content: message.content,
       from: message.from,
       room: message.room,
+      time: message.time,
       suggest: {
         input: message.content.split(" ")
       }
