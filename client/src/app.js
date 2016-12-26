@@ -9,7 +9,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import Drawer from 'material-ui/Drawer'
-import Popover, {PopoverAnimationHorizontal} from 'material-ui/Popover';
 import { List, ListItem } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 
@@ -21,10 +20,11 @@ import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import AccountIcon from 'material-ui/svg-icons/action/account-circle'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 
-// additional components
-import Room from './room'
-import Profile from './profile'
-import Settings from './settings'
+// additional pages
+import Room from './pages/room'
+import Profile from './pages/profile'
+import Settings from './pages/settings'
+import Search from './pages/search'
 
 class Main extends React.Component {
   constructor(props) {
@@ -42,37 +42,10 @@ class Main extends React.Component {
           <AppBar
             title="Chatroom"
             iconElementLeft={ <Nav /> }
-            iconElementRight = { <Search /> }
             />
           { this.props.children }
         </div>
       </MuiThemeProvider>
-    )
-  }
-}
-
-class Search extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      active : false,
-      query : "asuh dude"
-    }
-  }
-
-  render() {
-    return(
-      <div>
-        <SearchIcon onTouchTap = {() => this.setState({active: true}) }/>
-        <Popover
-          open = { this.state.active }
-          onRequestClose = {() => this.setState({ active: false })}
-          anchorOrigin = {{horizontal: 'right', vertical: 'top'}}
-          targetOrigin = {{horizontal: 'right', vertical: 'top'}} >
-          { this.state.query }
-        </Popover>
-      </div>
     )
   }
 }
@@ -126,6 +99,10 @@ class Nav extends React.Component {
                         rightIcon = { <SettingsIcon /> }
                         containerElement={ <Link to = { "/settings/" }/> } />
 
+              <ListItem primaryText = "Search"
+                        rightIcon = { <SearchIcon /> }
+                        containerElement={ <Link to = { "/search/" }/> } />
+
               <ListItem primaryText = "Rooms"
                         rightIcon = { <ChatIcon /> }
                         nestedItems = { this.rooms() }
@@ -147,6 +124,7 @@ render((
     <Route path = "/" component = { Main }>
       <Route path = "profile" component = { Profile } />
       <Route path = "settings" component = { Settings } />
+      <Route path = "search" component = { Search } />
       <Route path = "room">
         <Route path = "/room/:roomId" component = { Room }/>
       </Route>

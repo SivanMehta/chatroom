@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 import { Router, Route, Link, hashHistory } from 'react-router'
 
 // additional components
-import Message from './pieces/message'
+import Message from './message'
 
 // Material UI
 import { List, ListItem } from 'material-ui/List'
