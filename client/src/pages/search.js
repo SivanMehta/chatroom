@@ -41,7 +41,6 @@ export default class Search extends React.Component {
   }
 
   fetchSearchResults(data) {
-    console.log(data.query)
     this.setState({ searching: 1 })
 
     fetch('/api/search?q=' + data.query, {credentials: 'same-origin'})
