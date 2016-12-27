@@ -51,21 +51,25 @@ export default class Search extends React.Component {
 
   render() {
     return(
-      <div>
-        <Formsy.Form onValidSubmit = { this.fetchSearchResults }>
-          <FormsyText name = "query"
-                      required
-                      hintText = "Enter a message"
-                      ref = "form"
-                      style = { { width: '50%' } }/>
-        </Formsy.Form>
-        <RaisedButton
-          label = "Submit"
-          labelPosition = "before"
-          backgroundColor = "#C5E1A5"
-          icon = { this.renderIcon() }
-          onTouchTap = { this.fetchSearchResults }/>
-        { JSON.stringify(this.state.results) }
+      <div className = 'pure-g'>
+        <div className = "pure-u-md-1-3">
+          <Formsy.Form onValidSubmit = { this.fetchSearchResults }>
+            <FormsyText name = "query"
+              required
+              hintText = "Enter a message"
+              ref = "form"
+              style = { { width: '100%' } }/>
+          </Formsy.Form>
+          <RaisedButton
+            label = "Submit"
+            labelPosition = "before"
+            backgroundColor = "#C5E1A5"
+            icon = { this.renderIcon() }
+            onTouchTap = { this.fetchSearchResults }/>
+        </div>
+        <div className="pure-u-md-2-3">
+          { JSON.stringify(this.state.results) }
+        </div>
       </div>
     )
   }
