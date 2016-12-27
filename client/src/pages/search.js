@@ -6,7 +6,8 @@ import 'whatwg-fetch'
 // Material UI
 import CircularProgress from 'material-ui/CircularProgress'
 import { List, ListItem } from 'material-ui/List'
-import TextField from 'material-ui/TextField'
+import Formsy from 'formsy-react'
+import FormsyText from 'formsy-material-ui/lib/FormsyText'
 
 // persist button
 import SearchIcon from 'material-ui/svg-icons/action/search'
@@ -37,7 +38,8 @@ export default class Search extends React.Component {
       }
   }
 
-  fetchSearchResults() {
+  fetchSearchResults(data) {
+    console.log(data.query)
     this.setState({ searching: 1 })
 
     // simulating searching
@@ -47,13 +49,13 @@ export default class Search extends React.Component {
   render() {
     return(
       <div>
-        <TextField
-          id = 'query'
-          hintText = 'Search for Messages'
-          value = { this.state.query }
-          onChange={ event => this.setState({ query: event.target.value}) }
-          fullWidth = { true }/>
-        <br />
+        <Formsy.Form onValidSubmit = { this.fetchSearchResults }>
+          <FormsyText name = "query"
+                      required
+                      hintText = "Enter a message"
+                      ref = "form"
+                      style = { { width: '50%' } }/>
+        </Formsy.Form>
         <RaisedButton
           label = "Submit"
           labelPosition = "before"

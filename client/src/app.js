@@ -93,15 +93,18 @@ class Nav extends React.Component {
             <List>
               <ListItem primaryText = "Profile"
                         rightIcon = { <AccountIcon /> }
-                        containerElement={ <Link to = { "/profile/" }/> } />
+                        containerElement={ <Link to = { "/profile/" }/> }
+                        onTouchTap = { this.close } />
 
               <ListItem primaryText = "Settings"
                         rightIcon = { <SettingsIcon /> }
-                        containerElement={ <Link to = { "/settings/" }/> } />
+                        containerElement={ <Link to = { "/settings/" }/> }
+                        onTouchTap = { this.close } />
 
               <ListItem primaryText = "Search"
                         rightIcon = { <SearchIcon /> }
-                        containerElement={ <Link to = { "/search/" }/> } />
+                        containerElement={ <Link to = { "/search/" }/> }
+                        onTouchTap = { this.close } />
 
               <ListItem primaryText = "Rooms"
                         rightIcon = { <ChatIcon /> }
