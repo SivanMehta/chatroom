@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 import { Router, Route, Link, hashHistory } from 'react-router'
 
 // additional components
-import Message from './pieces/message'
+import Message from './message'
 
 // Material UI
 import { List, ListItem } from 'material-ui/List'
@@ -23,7 +23,9 @@ export default class Room extends React.Component {
     }
 
     socket.on('server:message', (message) => {
-      this.fetchMessages()
+      this.setState({
+        messages: this.state.messages.concat(message)
+      })
     })
 
     this.sendMessage = this.sendMessage.bind(this)
@@ -40,7 +42,6 @@ export default class Room extends React.Component {
   fetchMessages() {
     fetch('/api/rooms/' + this.props.params.roomId, { credentials: 'same-origin' })
       .then(res => res.json())
-      .then(json => json.messages)
       .then(messages => this.setState({messages: messages}) )
   }
 

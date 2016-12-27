@@ -2,6 +2,7 @@ const path = require('path')
 const room = require('./models/room')
 const profile = require('./models/profile')
 const logger = require('./logger')
+const db = require('./database/database')
 
 function login(req, res) {
   res.sendFile(path.join(__dirname, '..', 'client', 'login.html'))
@@ -33,12 +34,13 @@ exports.init = (app) => {
   app.post("/login", authorize)
   app.get("/logout", logout)
 
-  // rooms
-  app.get("/api/rooms/:roomId", is_logged_in, room.getRoomMessages)
+  // api-driven routes
   app.get("/api/profiles", is_logged_in, profile.getProfile)
   app.get("/api/settings", is_logged_in, profile.getSettings)
+  app.get('/api/rooms/:roomID', is_logged_in, db.getRoomMessages)
+  app.get("/api/search", is_logged_in, db.searchMessages)
 
-  // main application
+  // serve react application
   app.get("/", is_logged_in, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'client', 'index.html'))
   })

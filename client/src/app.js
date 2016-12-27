@@ -9,7 +9,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import Drawer from 'material-ui/Drawer'
-import Popover from 'material-ui/Popover'
 import { List, ListItem } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 
@@ -19,11 +18,13 @@ import ChatIcon from 'material-ui/svg-icons/communication/chat'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import AccountIcon from 'material-ui/svg-icons/action/account-circle'
+import SearchIcon from 'material-ui/svg-icons/action/search'
 
-// additional components
-import Room from './room'
-import Profile from './profile'
-import Settings from './settings'
+// additional pages
+import Room from './pages/room'
+import Profile from './pages/profile'
+import Settings from './pages/settings'
+import Search from './pages/search'
 
 class Main extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Main extends React.Component {
       <MuiThemeProvider>
         <div>
           <AppBar
-            title="chatroom"
+            title="Chatroom"
             iconElementLeft={ <Nav /> }
             />
           { this.props.children }
@@ -92,11 +93,18 @@ class Nav extends React.Component {
             <List>
               <ListItem primaryText = "Profile"
                         rightIcon = { <AccountIcon /> }
-                        containerElement={ <Link to = { "/profile/" }/> } />
+                        containerElement={ <Link to = { "/profile/" }/> }
+                        onTouchTap = { this.close } />
 
               <ListItem primaryText = "Settings"
                         rightIcon = { <SettingsIcon /> }
-                        containerElement={ <Link to = { "/settings/" }/> } />
+                        containerElement={ <Link to = { "/settings/" }/> }
+                        onTouchTap = { this.close } />
+
+              <ListItem primaryText = "Search"
+                        rightIcon = { <SearchIcon /> }
+                        containerElement={ <Link to = { "/search/" }/> }
+                        onTouchTap = { this.close } />
 
               <ListItem primaryText = "Rooms"
                         rightIcon = { <ChatIcon /> }
@@ -119,6 +127,7 @@ render((
     <Route path = "/" component = { Main }>
       <Route path = "profile" component = { Profile } />
       <Route path = "settings" component = { Settings } />
+      <Route path = "search" component = { Search } />
       <Route path = "room">
         <Route path = "/room/:roomId" component = { Room }/>
       </Route>
