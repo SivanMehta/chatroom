@@ -8,6 +8,7 @@ import CircularProgress from 'material-ui/CircularProgress'
 import { List, ListItem } from 'material-ui/List'
 import Formsy from 'formsy-react'
 import FormsyText from 'formsy-material-ui/lib/FormsyText'
+import 'whatwg-fetch'
 
 // persist button
 import SearchIcon from 'material-ui/svg-icons/action/search'
@@ -21,7 +22,8 @@ export default class Search extends React.Component {
 
     this.state = {
       query : '',
-      searching: 0
+      searching : 0,
+      results : []
     }
 
     this.fetchSearchResults = this.fetchSearchResults.bind(this)
@@ -42,8 +44,10 @@ export default class Search extends React.Component {
     console.log(data.query)
     this.setState({ searching: 1 })
 
-    // simulating searching
-    setTimeout(() => this.setState({ searching: 2 }), 5000)
+    fetch('/api/search?q=' + data.query, {credentials: 'same-origin'})
+      .then(res => res.json())
+      .then(results => this.setState({ results: results }))
+      .then(() => this.setState({ searching: 2 }))
   }
 
   render() {
@@ -62,6 +66,7 @@ export default class Search extends React.Component {
           backgroundColor = "#C5E1A5"
           icon = { this.renderIcon() }
           onTouchTap = { this.fetchSearchResults }/>
+        { JSON.stringify(this.state.results) }
       </div>
     )
   }
