@@ -8,7 +8,7 @@ var logger = new (winston.Logger)({
 
 logger.stream = {
     write: (message, encoding) => {
-        logger.debug(message)
+        logger.info(message.split('\n')[0])
     }
 }
 logger.level = 'debug'
