@@ -2,34 +2,41 @@ const faker = require('faker')
 const async = require('async')
 const es = require('./elasticsearch')
 const moment = require('moment')
-const logger = require('../logger')
 
-es.client.ping({ requestTimeout: 30000, }, (error) => {
-  if (error) {
-    logger.error('elasticsearch cluster is down!')
-  } else {
-    logger.info('elasticsearch cluster is up!')
-  }
-})
+function pingClient(app, callback) {
+  es.client.ping({ requestTimeout: 30000, }, (error) => {
+    if (error) {
+      app.logger.error('ElasticSearch cluster is down!')
+      done(error)
+    } else {
+      app.logger.info('ElasticSearch cluster is up!')
+      callback()
+    }
+  })
+}
 
-// start fresh elastic search index if one does not exist
-// and populate it with fake messages
-const rooms = ['John', 'Paul', 'George', 'Ringo']
-es.indexExists()
-  .then(exists => exists ? es.deleteIndex() : logger.error('index does not exist'))
-  .then(es.initIndex)
-  .then(es.initMapping)
-  .then(() => {
-    logger.debug('populating index')
-    Array(41).fill(1).map((e, i) => {
-      return es.addMessage({
-        content: faker.hacker.phrase(),
-        room: rooms[i % 4],
-        time: moment().subtract(i, 'hours').toISOString(),
-        from: faker.internet.email()
+function initializeIndex(app, callback) {
+  // start fresh elastic search index if one does not exist
+  // and populate it with fake messages
+  app.logger.info('Initializing ElasticSearch index')
+  const rooms = ['John', 'Paul', 'George', 'Ringo']
+  es.indexExists()
+    .then(exists => exists ? es.deleteIndex() : app.logger.error('ElasticSearch Index does not exist'))
+    .then(es.initIndex)
+    .then(es.initMapping)
+    .then(() => {
+      app.logger.debug('Populating index')
+      Array(41).fill(1).map((e, i) => {
+        return es.addMessage(app, {
+          content: faker.hacker.phrase(),
+          room: rooms[i % 4],
+          time: moment().subtract(i, 'hours').toISOString(),
+          from: faker.internet.email()
+        })
       })
     })
-  })
+    .then(callback)
+}
 
 exports.searchMessages = (req, res) => {
   if(!req.query.q) {
@@ -67,4 +74,11 @@ exports.getRoomMessages = (req, res) => {
       }))
     }
   })
+}
+
+exports.init = (app, done) => {
+  async.waterfall([
+    (callback) => { pingClient(app, callback) },
+    (callback) => { initializeIndex(app, callback) }
+  ], (err, _) => done(err))
 }
