@@ -1,5 +1,16 @@
 const express = require('express')
 var app = express()
+/*
+  Setup application
+  1. Initialize logger
+  2. Body and Cookie Parsing
+  3. Initialize ElasticSearch Connection
+  4. Serve Static Files
+  5. Initialize socket connection
+  success: Start Server
+  failure: Log Error Message
+ */
+
 const bodyParser = require('body-parser')
 const path = require('path')
 
