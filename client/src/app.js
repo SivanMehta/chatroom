@@ -1,7 +1,7 @@
 // React
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Link, hashHistory } from 'react-router'
+import { Router, Route, Link, hashHistory, IndexRoute } from 'react-router'
 
 // Material UI
 import injectTapEventPlugin from 'react-tap-event-plugin'; injectTapEventPlugin()
@@ -125,6 +125,7 @@ class Nav extends React.Component {
 render((
   <Router history = { hashHistory }>
     <Route path = "/" component = { Main }>
+      <IndexRoute component = { Profile } />
       <Route path = "profile" component = { Profile } />
       <Route path = "settings" component = { Settings } />
       <Route path = "search" component = { Search } />

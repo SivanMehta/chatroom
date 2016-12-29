@@ -32,15 +32,17 @@ export default class Profile extends React.Component {
                                     avatar = { this.state.profile.avatar } />
 
     return(
-      <Card>
-        <CardMedia overlay = { personalInfo } >
-          <img src = { this.state.profile.background } />
-        </CardMedia>
-        <CardTitle subtitle="About Me" />
-        <CardText>
-          { this.state.profile.mantra }
-        </CardText>
-      </Card>
+      <div className = 'pure-g pure-u-md-1-3'>
+        <Card>
+          <CardMedia overlay = { personalInfo } >
+            <img src = { this.state.profile.background } />
+          </CardMedia>
+          <CardTitle subtitle="About Me" />
+          <CardText>
+            { this.state.profile.mantra }
+          </CardText>
+        </Card>
+      </div>
     )
   }
 

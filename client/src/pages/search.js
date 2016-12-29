@@ -8,13 +8,17 @@ import CircularProgress from 'material-ui/CircularProgress'
 import { List, ListItem } from 'material-ui/List'
 import Formsy from 'formsy-react'
 import FormsyText from 'formsy-material-ui/lib/FormsyText'
-import 'whatwg-fetch'
 
 // persist button
 import SearchIcon from 'material-ui/svg-icons/action/search'
 import DoneIcon from 'material-ui/svg-icons/action/done'
 import { green900 } from 'material-ui/styles/colors'
 import RaisedButton from 'material-ui/RaisedButton'
+
+// messages
+import 'whatwg-fetch'
+import Message from './message'
+import { Link } from 'react-router'
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -49,23 +53,46 @@ export default class Search extends React.Component {
       .then(() => this.setState({ searching: 2 }))
   }
 
+  renderMessages() {
+    // you should actually have an indication of
+    // the messages are an empty array
+    const result = this.state.results.map((message, i) => {
+      return(
+        <Link to = { '/room/' + message.room }
+          key = { i }
+          style={{ textDecoration: 'none' }}>
+          <Message content = { message.content }
+            time = { message.time }
+            avatar = { i }
+            key = { message.room + i }
+            from = { message.from } />
+        </Link>
+      )
+    })
+    return result
+  }
+
   render() {
     return(
-      <div>
-        <Formsy.Form onValidSubmit = { this.fetchSearchResults }>
-          <FormsyText name = "query"
-                      required
-                      hintText = "Enter a message"
-                      ref = "form"
-                      style = { { width: '50%' } }/>
-        </Formsy.Form>
-        <RaisedButton
-          label = "Submit"
-          labelPosition = "before"
-          backgroundColor = "#C5E1A5"
-          icon = { this.renderIcon() }
-          onTouchTap = { this.fetchSearchResults }/>
-        { JSON.stringify(this.state.results) }
+      <div className = 'pure-g'>
+        <div className = "pure-u-md-1-3">
+          <Formsy.Form onValidSubmit = { this.fetchSearchResults }>
+            <FormsyText name = "query"
+              required
+              hintText = "Enter a message"
+              ref = "form"
+              style = { { width: '100%' } }/>
+          </Formsy.Form>
+          <RaisedButton
+            label = "Submit"
+            labelPosition = "before"
+            backgroundColor = "#C5E1A5"
+            icon = { this.renderIcon() }
+            onTouchTap = { this.fetchSearchResults }/>
+        </div>
+        <div className = 'pure-u-md-2-3'>
+          { this.renderMessages() }
+        </div>
       </div>
     )
   }
