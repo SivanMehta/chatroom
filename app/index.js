@@ -8,7 +8,9 @@ var app = express()
   2. Body and Cookie Parsing
   3. Initialize database
   4. Serve Static Files
+  5. Initialize server
   5. Initialize socket connection
+  6. Initilize all of the routes
   success: Start Server
   failure: Log Error Message
  */
@@ -18,9 +20,12 @@ async.waterfall([
   (done) => { require('./models/parsing').init(app, done) },
   (done) => { require('./database/database').init(app, done) },
   (done) => { require('./models/static-files').init(app, done) },
-  (done) => { console.log('4'); done() },
-  (done) => { console.log('5'); done() },
-  (done) => { console.log('6'); done() },
+  (done) => { require('./models/server').init(app, done) },
+  (done) => { require('./models/room-socket').init(app, done) },
+  (done) => { console.log('TBA'); done() },
+  (done) => { console.log('TBA'); done() },
+  (done) => { console.log('TBA'); done() },
+  (done) => { console.log('TBA'); done() },
 ], (err, result) => {
 
 })
