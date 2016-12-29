@@ -21,5 +21,5 @@ exports.init = (app, done) => {
 
   app.logger.info('Initialized Logger')
 
-  done()
+  done(null)
 }

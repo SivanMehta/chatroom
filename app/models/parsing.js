@@ -7,5 +7,5 @@ exports.init = (app, done) => {
 
   app.logger.info('Initialized body and cookie parsing')
 
-  done()
+  done(null)
 }
