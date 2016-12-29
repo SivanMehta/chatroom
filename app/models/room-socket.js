@@ -21,7 +21,7 @@ exports.init = (app, done) => {
         time: moment().toISOString(),
         from: socket.handshake.headers.cookie.email
       }
-      es.addMessage(message)
+      es.addMessage(app, message)
       app.io.sockets.emit('server:message', message)
     })
   })
