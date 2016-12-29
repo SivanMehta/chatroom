@@ -5,32 +5,31 @@ var client = new elasticsearch.Client({
 })
 
 exports.client = client
-const indexName = 'messages'
 
 /**
 * Delete an index
 */
-exports.deleteIndex = () => {
-  return client.indices.delete({ index: indexName })
+exports.deleteMessageIndex = () => {
+  return client.indices.delete({ index: 'messages' })
 }
 
 /**
 * create an index
 */
-exports.initIndex = () => {
-  return client.indices.create({ index: indexName })
+exports.initMessageIndex = () => {
+  return client.indices.create({ index: 'messages' })
 }
 
 /**
 * check if an index exists
 */
-exports.indexExists = () => {
-  return client.indices.exists({ index: indexName })
+exports.messageIndexExists = () => {
+  return client.indices.exists({ index: 'messages' })
 }
 
 exports.searchMessages = (query, callback) => {
   client.search({
-    index: indexName,
+    index: 'message',
     q: 'content:*' + query + "*"
   }, callback)
 }
@@ -51,7 +50,7 @@ exports.getRoomMessages = (room, callback) => {
 
 exports.addMessage = (app, message) => {
   client.create({
-    index: indexName,
+    index: 'messages',
     type: "message",
     id: message.room + message.time,
     body: {
@@ -70,10 +69,9 @@ exports.addMessage = (app, message) => {
   })
 }
 
-exports.initMapping = () => {
-  // logger.debug('initalizing mapping')
+exports.initMessageMapping = () => {
   return client.indices.putMapping({
-    index: indexName,
+    index: 'messages',
     type: "message",
     body: {
       properties: {

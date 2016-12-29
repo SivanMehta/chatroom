@@ -20,10 +20,10 @@ function initializeIndex(app, callback) {
   // and populate it with fake messages
   app.logger.info('Initializing ElasticSearch index')
   const rooms = ['John', 'Paul', 'George', 'Ringo']
-  es.indexExists()
-    .then(exists => exists ? es.deleteIndex() : app.logger.error('ElasticSearch Index does not exist'))
-    .then(es.initIndex)
-    .then(es.initMapping)
+  es.messageIndexExists()
+    .then(exists => exists ? es.deleteMessageIndex() : app.logger.error('ElasticSearch Index does not exist'))
+    .then(es.initMessageIndex)
+    .then(es.initMessageMapping)
     .then(() => {
       app.logger.info('Populating index')
       Array(41).fill(1).map((e, i) => {
