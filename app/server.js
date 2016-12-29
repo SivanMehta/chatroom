@@ -1,5 +1,7 @@
+const async = require('async')
 const express = require('express')
 var app = express()
+
 /*
   Setup application
   1. Initialize logger
@@ -11,16 +13,19 @@ var app = express()
   failure: Log Error Message
  */
 
+async.waterfall([
+  (done) => { require('./logger').init(app, done) },
+  (done) => { console.log('2'); done() },
+  (done) => { console.log('3'); done() },
+  (done) => { console.log('4'); done() },
+  (done) => { console.log('5'); done() },
+  (done) => { console.log('6'); done() },
+], (err, result) => {
+
+})
+
 const bodyParser = require('body-parser')
 const path = require('path')
-
-// logging
-const logger = require('./logger')
-const env = process.env.NODE_ENV || 'development'
-logger.level = env === 'development' ? 'debug' : 'info'
-
-const morgan = require('morgan')
-app.use(morgan('dev', { stream: logger.stream }))
 
 // body and cookie parsing
 app.use(bodyParser.urlencoded({ extended: true }))
