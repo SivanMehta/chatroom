@@ -1,14 +1,17 @@
 const faker = require('faker')
 const moment = require('moment')
-const logger = require('../logger')
 const es = require('../database/elasticsearch')
+const socketCookieParser = require('socket.io-cookie')
 
-function initializeSocket(io) {
-  io.on('connection', (socket) => {
+exports.init = (app, done) => {
+  app.io = require('socket.io').listen(app.server)
+  app.io.use(socketCookieParser)
+
+  app.io.on('connection', (socket) => {
     // at the point, users are connected
-    logger.debug(socket.id, 'connected')
+    app.logger.debug(socket.id, 'connected')
     socket.on('disconnect', () => {
-      logger.debug(socket.id, 'disconnected')
+      app.logger.debug(socket.id, 'disconnected')
     })
 
     socket.on('client:message', (data) => {
@@ -19,11 +22,10 @@ function initializeSocket(io) {
         from: socket.handshake.headers.cookie.email
       }
       es.addMessage(message)
-      io.sockets.emit('server:message', message)
+      app.io.sockets.emit('server:message', message)
     })
   })
-}
 
-module.exports = {
-  initializeSocket
+  app.logger.info('Initialized socket connection')
+  done()
 }
