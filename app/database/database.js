@@ -25,7 +25,7 @@ function initializeIndex(app, callback) {
     .then(es.initIndex)
     .then(es.initMapping)
     .then(() => {
-      app.logger.debug('Populating index')
+      app.logger.info('Populating index')
       Array(41).fill(1).map((e, i) => {
         return es.addMessage(app, {
           content: faker.hacker.phrase(),
