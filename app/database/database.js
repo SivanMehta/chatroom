@@ -51,7 +51,7 @@ function searchMessages(req, res) {
             content: message._source.content,
             from: message._source.from,
             room: message._source.room,
-            time: message._source.time
+            time: moment(message._source.time).format("h:mma MMM Do")
           }
         }))
       }
@@ -69,7 +69,7 @@ function getRoomMessages(req, res) {
           content: message._source.content,
           from: message._source.from,
           room: message._source.room,
-          time: message._source.time
+          time: moment(message._source.time).format("h:mma MMM Do")
         }
       }))
     }
