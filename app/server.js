@@ -12,7 +12,7 @@ const morgan = require('morgan')
 app.use(morgan('dev', { stream: logger.stream }))
 
 // body and cookie parsing
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(require('cookie-parser')())
 

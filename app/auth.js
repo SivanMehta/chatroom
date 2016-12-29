@@ -39,9 +39,6 @@ exports.init = (app) => {
   app.get("/api/profiles", is_logged_in, profile.getProfile)
   app.get("/api/settings", is_logged_in, profile.getSettings)
   app.get('/api/rooms/:roomID', is_logged_in, db.getRoomMessages)
-  app.post('/api/message', is_logged_in, (req, res) => {
-    logger.debug(req.body)
-  })
   app.get("/api/search", is_logged_in, db.searchMessages)
 
   // serve react application
