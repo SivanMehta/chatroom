@@ -26,6 +26,8 @@ export default class Room extends React.Component {
       this.setState({
         messages: this.state.messages.concat(message)
       })
+
+      window.scrollTo(0,document.body.scrollHeight)
     })
 
     this.sendMessage = this.sendMessage.bind(this)

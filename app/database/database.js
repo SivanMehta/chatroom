@@ -16,16 +16,16 @@ es.client.ping({ requestTimeout: 30000, }, (error) => {
 // and populate it with fake messages
 const rooms = ['John', 'Paul', 'George', 'Ringo']
 es.indexExists()
-  .then(exists => exists ? es.deleteIndex() : console.log('index does not exist'))
+  .then(exists => exists ? es.deleteIndex() : logger.error('index does not exist'))
   .then(es.initIndex)
   .then(es.initMapping)
   .then(() => {
     logger.debug('populating index')
-    Array(11).fill(1).map((e, i) => {
+    Array(41).fill(1).map((e, i) => {
       return es.addMessage({
         content: faker.hacker.phrase(),
         room: rooms[i % 4],
-        time: moment().toISOString(),
+        time: moment().subtract(i, 'hours').toISOString(),
         from: faker.internet.email()
       })
     })

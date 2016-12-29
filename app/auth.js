@@ -29,6 +29,7 @@ function logout(req, res) {
 
 exports.init = (app) => {
 
+  logger.debug("setting up routes")
   // auth routes
   app.get("/login", login)
   app.post("/login", authorize)
