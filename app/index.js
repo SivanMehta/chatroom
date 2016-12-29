@@ -18,9 +18,7 @@ const intializers = [
   './models/room-socket',
   // 6. Initilize all of the routes
   './routes'
-].map(filename => {
-  return (done) => { require(filename).init(app, done) }
-})
+].map(filename => done => require(filename).init(app, done) )
 
 // activate all intializers
 async.waterfall(intializers, (err, _) => {
