@@ -14,8 +14,8 @@ var app = express()
  */
 
 async.waterfall([
-  (done) => { require('./logger').init(app, done) },
-  (done) => { console.log('2'); done() },
+  (done) => { require('./models/logger').init(app, done) },
+  (done) => { require('./models/parsing').init(app, done) },
   (done) => { console.log('3'); done() },
   (done) => { console.log('4'); done() },
   (done) => { console.log('5'); done() },
@@ -24,13 +24,7 @@ async.waterfall([
 
 })
 
-const bodyParser = require('body-parser')
 const path = require('path')
-
-// body and cookie parsing
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.use(require('cookie-parser')())
 
 // Handle static files
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')))
