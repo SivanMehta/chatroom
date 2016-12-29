@@ -1,4 +1,3 @@
-const logger = require('../logger')
 var elasticsearch = require('elasticsearch')
 var client = new elasticsearch.Client({
   host: 'localhost:9200',
@@ -19,7 +18,6 @@ exports.deleteIndex = () => {
 * create an index
 */
 exports.initIndex = () => {
-  logger.debug('initalizing index')
   return client.indices.create({ index: indexName })
 }
 
@@ -51,7 +49,7 @@ exports.getRoomMessages = (room, callback) => {
   }, callback)
 }
 
-exports.addMessage = (message) => {
+exports.addMessage = (app, message) => {
   client.create({
     index: indexName,
     type: "message",
@@ -67,13 +65,13 @@ exports.addMessage = (message) => {
     }
   }, (err, response) => {
     if(err) {
-      logger.error(err)
+      app.logger.error(err)
     }
   })
 }
 
 exports.initMapping = () => {
-  logger.debug('initalizing mapping')
+  // logger.debug('initalizing mapping')
   return client.indices.putMapping({
     index: indexName,
     type: "message",

@@ -1,3 +1,4 @@
+const morgan = require('morgan')
 const winston = require('winston')
 var logger = new (winston.Logger)({
   transports: [
@@ -11,6 +12,14 @@ logger.stream = {
         logger.info(message.split('\n')[0])
     }
 }
-logger.level = 'debug'
 
-module.exports = logger
+exports.init = (app, done) => {
+  app.logger = logger
+  app.env = process.env.NODE_ENV || 'development'
+  logger.level = app.env === 'development' ? 'debug' : 'info'
+  app.use(morgan('dev', { stream: logger.stream }))
+
+  app.logger.info('Initialized Logger')
+
+  done(null)
+}
