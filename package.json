@@ -2,7 +2,7 @@
   "name": "reference-project",
   "version": "1.0.0",
   "description": "Just using as many different Node.js libraries / techniques as possible so I have a centralized place to reference code.",
-  "main": "app/server.js",
+  "main": "app/index.js",
   "scripts": {
     "test": "echo 'there are no test written' && exit 1",
     "watch": "rm -rf client/public/dist/ && webpack --progress --watch",
