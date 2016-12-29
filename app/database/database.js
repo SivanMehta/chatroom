@@ -38,7 +38,7 @@ function initializeIndex(app, callback) {
     .then(callback)
 }
 
-exports.searchMessages = (req, res) => {
+function searchMessages(req, res) {
   if(!req.query.q) {
     res.send([])
   } else {
@@ -59,7 +59,7 @@ exports.searchMessages = (req, res) => {
   }
 }
 
-exports.getRoomMessages = (req, res) => {
+function getRoomMessages(req, res) {
   es.getRoomMessages(req.params.roomID, (err, response) => {
     if(err) {
       logger.error(err)
@@ -80,5 +80,15 @@ exports.init = (app, done) => {
   async.waterfall([
     (callback) => { pingClient(app, callback) },
     (callback) => { initializeIndex(app, callback) }
-  ], (err, _) => done(err))
+  ], (err, _) => {
+    if(err) {
+      done(err)
+    } else {
+      app.db = {
+        searchMessages,
+        getRoomMessages
+      }
+      done(null)
+    }
+  })
 }

@@ -22,12 +22,15 @@ async.waterfall([
   (done) => { require('./models/static-files').init(app, done) },
   (done) => { require('./models/server').init(app, done) },
   (done) => { require('./models/room-socket').init(app, done) },
-  (done) => { console.log('TBA'); done() },
-  (done) => { console.log('TBA'); done() },
-  (done) => { console.log('TBA'); done() },
-  (done) => { console.log('TBA'); done() },
-], (err, result) => {
-
+  (done) => { require('./routes').init(app, done) }
+], (err, _) => {
+  if(err) {
+    app.logger.error(error)
+  } else {
+    app.server.listen(app.PORT, () => {
+        app.logger.info("Server started on port " + app.PORT)
+    })
+  }
 })
 
 // set up server
