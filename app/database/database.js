@@ -21,11 +21,11 @@ es.indexExists()
   .then(es.initMapping)
   .then(() => {
     logger.debug('populating index')
-    Array(11).fill(1).map((e, i) => {
+    Array(41).fill(1).map((e, i) => {
       return es.addMessage({
         content: faker.hacker.phrase(),
         room: rooms[i % 4],
-        time: moment().toISOString(),
+        time: moment().subtract(i, 'hours').toISOString(),
         from: faker.internet.email()
       })
     })

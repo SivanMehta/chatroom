@@ -52,7 +52,6 @@ exports.getRoomMessages = (room, callback) => {
 }
 
 exports.addMessage = (message) => {
-  logger.debug('adding dummy message from', message.from)
   client.create({
     index: indexName,
     type: "message",
