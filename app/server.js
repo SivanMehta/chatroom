@@ -16,18 +16,13 @@ var app = express()
 async.waterfall([
   (done) => { require('./models/logger').init(app, done) },
   (done) => { require('./models/parsing').init(app, done) },
-  (done) => { console.log('3'); done() },
+  (done) => { require('./models/static-files').init(app, done) },
   (done) => { console.log('4'); done() },
   (done) => { console.log('5'); done() },
   (done) => { console.log('6'); done() },
 ], (err, result) => {
 
 })
-
-const path = require('path')
-
-// Handle static files
-app.use(express.static(path.join(__dirname, '..', 'client', 'public')))
 
 // set up server
 const PORT = process.env.PORT || 8080
