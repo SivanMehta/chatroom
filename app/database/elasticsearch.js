@@ -29,7 +29,7 @@ exports.messageIndexExists = () => {
 
 exports.searchMessages = (query, callback) => {
   client.search({
-    index: 'message',
+    index: 'messages',
     q: 'content:*' + query + "*"
   }, callback)
 }

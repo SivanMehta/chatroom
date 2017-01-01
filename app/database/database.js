@@ -46,7 +46,7 @@ exports.init = (app, done) => {
     } else {
       es.searchMessages(req.query.q, (err, response) => {
         if(err) {
-          logger.error(err)
+          app.logger.error(err)
         } else {
           res.send(response.hits.hits.map(message => {
             return {

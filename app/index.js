@@ -23,7 +23,7 @@ async.waterfall(intializers, (err, _) => {
   // success: Start server
   // failure: Log error Message
   if(err) {
-    app.logger.error(error)
+    app.logger.error(err)
   } else {
     app.server.listen(app.PORT, () => {
         app.logger.info("Server started on port " + app.PORT)
