@@ -19,7 +19,7 @@ exports.init = (app, done) => {
   logger.level = app.env === 'development' ? 'debug' : 'info'
   app.use(morgan('dev', { stream: logger.stream }))
 
-  app.logger.info('Initialized Logger')
+  app.logger.info('Initialized logger')
 
   done(null)
 }

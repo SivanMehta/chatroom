@@ -4,19 +4,17 @@ var app = express()
 
 // Instantiate intializers of the application
 const intializers = [
-  // 1. Initialize logger
+  // Initialize logger
   './models/logger',
-  // 2. Body and Cookie Parsing
-  './models/parsing',
-  // 3. Initialize database
-  './database/database',
-  // 4. Serve Static Files
-  './models/static-files',
-  // 5. Initialize server
+  // Initialize server and socket connection
   './models/server',
-  // 5. Initialize socket connection
-  './models/room-socket',
-  // 6. Initilize all of the routes
+  // Body and Cookie Parsing
+  './models/parsing',
+  // Initialize database
+  './database/database',
+  // Serve Static Files
+  './models/static-files',
+  // Initilize all of the routes
   './routes'
 ].map(filename => done => require(filename).init(app, done) )
 
