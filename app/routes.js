@@ -1,5 +1,6 @@
 const path = require('path')
 const profile = require('./models/profile')
+const scrambler = require('./scrambler')
 
 exports.init = (app, done) => {
 
@@ -16,9 +17,22 @@ exports.init = (app, done) => {
     res.redirect('/')
   }
 
+  function authorizeAPI(req, res) {
+    const credentials = req.headers.auth ? req.headers.auth : req.cookies.email
+    res.send({
+      auth: scrambler.encrypt(credentials)
+    })
+  }
+
   function is_logged_in(req, res, next) {
-    const status = req.cookies.email ? true : false
-    status ? next() : res.redirect('/login')
+    try {
+      const apiLogin = scrambler.decrypt(req.headers.auth) ? true : false
+      apiLogin ? next() : res.redirect('/login')
+    } catch (e) {
+      // scrambler could not decrypt authorization header
+      const browserLoggedIn = req.cookies.email ? true : false
+      browserLoggedIn ? next() : res.redirect('/login')
+    }
   }
 
   function logout(req, res) {
@@ -32,7 +46,7 @@ exports.init = (app, done) => {
   app.get('/logout', logout)
 
   // api-driven routes
-  // app.get('/api/authorize', authorizeAPI)
+  app.get('/api/authorize', authorizeAPI)
   app.get('/api/profiles', is_logged_in, profile.getProfile)
   app.get('/api/settings', is_logged_in, profile.getSettings)
   app.get('/api/messages/:roomID', is_logged_in, app.db.getRoomMessages)
