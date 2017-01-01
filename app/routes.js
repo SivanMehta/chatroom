@@ -7,7 +7,7 @@ exports.init = (app, done) => {
     res.sendFile(path.join(__dirname, '..', 'client', 'login.html'))
   }
 
-  function authorize(req, res) {
+  function authorizeBrowser(req, res) {
     app.logger.debug(req.body)
 
     // do some checking
@@ -28,10 +28,11 @@ exports.init = (app, done) => {
 
   // auth routes
   app.get("/login", login)
-  app.post("/login", authorize)
+  app.post("/login", authorizeBrowser)
   app.get("/logout", logout)
 
   // api-driven routes
+  // app.get('/api/authorize', authorizeAPI)
   app.get("/api/profiles", is_logged_in, profile.getProfile)
   app.get("/api/settings", is_logged_in, profile.getSettings)
   app.get('/api/messages/:roomID', is_logged_in, app.db.getRoomMessages)
