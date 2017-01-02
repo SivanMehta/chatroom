@@ -42,7 +42,7 @@ export default class Room extends React.Component {
   }
 
   fetchMessages() {
-    fetch('/api/rooms/' + this.props.params.roomId, { credentials: 'same-origin' })
+    fetch('/api/messages/' + this.props.params.roomId, { credentials: 'same-origin' })
       .then(res => res.json())
       .then(messages => this.setState({messages: messages}) )
   }
@@ -52,7 +52,14 @@ export default class Room extends React.Component {
       content: data.newMessage,
       room: this.props.params.roomId
     }
-    socket.emit('client:message', message)
+    fetch('/api/messages', {
+      credentials: 'same-origin',
+      body: JSON.stringify(message),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => console.log(res.status))
     this.refs.form.resetValue()
   }
 
