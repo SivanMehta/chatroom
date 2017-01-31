@@ -2,3 +2,4 @@ node_modules/
 client/public/dist/
 *.log
 elasticsearch-2.1.0/
+.DS_Store
