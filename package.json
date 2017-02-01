@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha test/**/*.js",
     "watch": "rm -rf client/public/dist/ && webpack --progress --watch",
+    "start-db": "./elasticsearch-2.1.0/bin/elasticsearch",
     "deploy": "webpack --progress && npm start",
     "start": "node app/index.js"
   },
